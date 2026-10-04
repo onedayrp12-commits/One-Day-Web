@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Day RP | ون داي ار بي — المنصة ولوحة التحكم الشاملة</title>
+<meta name="description" content="One Day RP - أقوى سيرفر حياة واقعية عربي. لوحة إدارة كاملة وشاملة للتحكم بجميع نصوص ومظهر وأسعار وحسابات اللاعبين.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Changa:wght@600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{void:'#06070D',abyss:'#0B0D18',card:'#121524',card2:'#181C31',line:'rgba(255,255,255,0.08)',gold:'var(--gold)',gold2:'var(--gold2)',crimson:'#FF2E4D',neon:'#00E5FF',violet:'#7C3AED',muted:'#9AA0B5'},fontFamily:{cairo:['Cairo','sans-serif'],changa:['Changa','sans-serif'],orbit:['Orbitron','Changa','sans-serif']}}}}
+</script>
+<style>
+:root{--gold:#FFB800;--gold2:#FFD75E;--gold-rgb:255,184,0;--crimson:#FF2E4D;--neon:#00E5FF;--violet:#7C3AED}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:#06070D;color:#EDEEF5;font-family:'Cairo',sans-serif;overflow-x:hidden}
+#siteBgOverlay{position:fixed;inset:0;z-index:-1;background-size:cover;background-position:center;opacity:0.22;pointer-events:none;transition:all .5s ease}
+::-webkit-scrollbar{width:9px;height:8px}::-webkit-scrollbar-track{background:#080912}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold),#FF6B00);border-radius:20px;border:2px solid #080912}
+.font-orbit{font-family:'Orbitron','Changa',sans-serif}
+.gold-text{background:linear-gradient(120deg,#FFF3B0 0%,#FFD75E 25%,var(--gold) 50%,#FF8A00 75%,#FFF3B0 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shineGold 4s linear infinite}
+@keyframes shineGold{to{background-position:200% center}}
+.bg-grid{background-image:linear-gradient(rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:40px 40px}
+.btn-gold{position:relative;background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 40%,#FF7A00 100%);color:#0A0A0A;font-weight:900;box-shadow:0 6px 25px -4px rgba(var(--gold-rgb),.45);transition:all .25s ease;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:none;text-decoration:none}
+.btn-gold:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 10px 30px -2px rgba(var(--gold-rgb),.6)}.btn-gold:active{transform:translateY(0)}
+.btn-ghost{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);backdrop-filter:blur(12px);transition:all .25s ease;cursor:pointer;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(var(--gold-rgb),.12);transform:translateY(-1px);color:#fff}
+.btn-discord{background:linear-gradient(135deg,#5865F2,#404EED);transition:all .25s ease;cursor:pointer}
+.btn-discord:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.glass{background:linear-gradient(160deg,rgba(24,28,49,.88),rgba(11,13,24,.94));border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px)}
+.nav-link{position:relative;padding:8px 14px;font-weight:800;font-size:13.5px;color:#C8CCDB;transition:all .2s ease;border-radius:10px;white-space:nowrap;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border:1px solid transparent}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(var(--gold-rgb),.12);border-color:rgba(var(--gold-rgb),.3)}.nav-link.active{box-shadow:inset 0 -2px 0 var(--gold)}
+.badge-line{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(var(--gold-rgb),.35);background:rgba(var(--gold-rgb),.08);color:var(--gold2);font-size:12px;font-weight:800;padding:6px 14px;border-radius:99px}
+.section-title{font-family:'Changa',sans-serif;font-weight:800;font-size:clamp(26px,4vw,42px);line-height:1.25}
+.hr-gold{height:3px;width:80px;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--crimson),transparent)}
+.hero-overlay{background:radial-gradient(850px 480px at 50% 0%,rgba(var(--gold-rgb),.2),transparent 70%),linear-gradient(180deg,rgba(6,7,13,.3) 0%,#06070D 92%)}
+.status-dot{width:9px;height:9px;border-radius:99px;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulseDot 1.8s infinite;display:inline-block}.status-dot.off{background:#FF2E4D;box-shadow:0 0 0 0 rgba(255,46,77,.6)}
+@keyframes pulseDot{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.page{display:none}.page.active{display:block;animation:pageFadeIn .35s ease forwards}
+@keyframes pageFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tab-btn{transition:all .2s ease;cursor:pointer}.tab-btn.active{background:linear-gradient(135deg,var(--gold),#FF6B00)!important;color:#000!important;border-color:transparent!important;font-weight:900}
+.atab{transition:all .2s ease;cursor:pointer;text-align:right}.atab.active{background:linear-gradient(135deg,var(--gold),#FF6B00)!important;color:#000!important;font-weight:900;border-color:transparent!important}
+.input{width:100%;background:#0E1120;border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:11px 14px;font-size:13.5px;color:#fff;transition:all .2s ease;outline:none}
+.input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(--gold-rgb),.18);background:#13172c}
+select.input option{background:#121524;color:#fff}
+label.lbl{font-size:12px;font-weight:800;color:#C8CCDB;margin-bottom:5px;display:block}
+.chip{font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px;display:inline-flex;align-items:center;gap:4px}
+.shop-card-img{height:180px;object-fit:cover;transition:transform .4s ease;width:100%}.shop-card:hover .shop-card-img{transform:scale(1.06)}
+.modal-bg{background:rgba(4,5,12,.85);backdrop-filter:blur(10px)}
+.shine-border{position:relative}.shine-border::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(var(--gold-rgb),.6),rgba(255,255,255,.08),rgba(255,46,77,.45));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.admin-table th{font-size:11.5px;color:#9AA0B5;font-weight:800;padding:12px 10px;text-align:right;white-space:nowrap}
+.admin-table td{padding:12px 10px;font-size:13px;font-weight:700;border-top:1px solid rgba(255,255,255,.06);vertical-align:middle}
+.toast-item{padding:12px 22px;border-radius:14px;font-weight:800;font-size:13px;box-shadow:0 16px 40px rgba(0,0,0,.6);border:1px solid rgba(var(--gold-rgb),.4);background:#121524;color:#fff;animation:pageFadeIn .3s ease;max-width:90vw;text-align:center;pointer-events:auto}
+.step-num{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#FF6B00);color:#000;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.badge-new{background:linear-gradient(135deg,#7C3AED,#FF2E4D);color:#fff;font-size:9.5px;padding:2px 7px;border-radius:99px;font-weight:900;margin-right:4px}
+</style>
+</head>
+<body id="bodyRoot" class="bg-void">
+<div id="siteBgOverlay"></div>
+
+<div id="announceBar" class="relative z-[60] text-center text-[12.5px] font-extrabold py-2 px-4 shadow-md" style="background:linear-gradient(90deg,#FF2E4D,#FF6B00,var(--gold));color:#000">
+<div class="max-w-[1280px] mx-auto flex items-center justify-center gap-2 flex-wrap">
+<i class="fa-solid fa-fire text-black animate-bounce"></i>
+<span id="announceText">الموسم الثالث انطلق — خصم 30% بكود ONEDAY30 + باقات حصرية متاحة الآن</span>
+<button onclick="navigateTo('store')" class="underline font-black hover:text-white transition-colors cursor-pointer mr-2">تسوق الآن &larr;</button>
+<button onclick="document.getElementById('announceBar').style.display='none'" class="absolute left-2 top-1.5 w-6 h-6 rounded-full bg-black/15 flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+</div>
+</div>
+
+<header class="sticky top-0 z-[70] border-b border-line" style="background:rgba(6,7,13,.92);backdrop-filter:blur(20px);">
+<div class="max-w-[1280px] mx-auto px-4 lg:px-6">
+<div class="flex items-center justify-between h-[70px] gap-3">
+<a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 shrink-0 cursor-pointer">
+<div class="w-[46px] h-[46px] rounded-[14px] flex items-center justify-center font-orbit font-black text-xl text-black shadow-lg" style="background:linear-gradient(135deg,#FFF3B0,var(--gold) 45%,#FF6B00)" id="headerLogoBox">OD</div>
+<div class="leading-tight hidden sm:block">
+<div class="font-orbit font-black text-[17px] tracking-wider text-white" dir="ltr">ONE DAY <span class="gold-text" id="headerLogoText">RP</span></div>
+<div class="text-[11px] font-bold text-muted" id="headerSubText">سيرفر الحياة الواقعية العربي</div>
+</div>
+</a>
+<nav class="hidden xl:flex items-center gap-1">
+<button onclick="navigateTo('home')" data-nav="home" class="nav-link active"><i class="fa-solid fa-house text-xs"></i> الرئيسية</button>
+<button onclick="navigateTo('join')" data-nav="join" class="nav-link"><i class="fa-solid fa-gamepad text-xs"></i> التقديم / Whitelist</button>
+<button onclick="navigateTo('store')" data-nav="store" class="nav-link"><i class="fa-solid fa-cart-shopping text-xs"></i> المتجر</button>
+<button onclick="navigateTo('rules')" data-nav="rules" class="nav-link"><i class="fa-solid fa-scale-balanced text-xs"></i> القوانين</button>
+<button onclick="navigateTo('news')" data-nav="news" class="nav-link"><i class="fa-solid fa-newspaper text-xs"></i> الأخبار</button>
+<button onclick="navigateTo('support')" data-nav="support" class="nav-link"><i class="fa-solid fa-headset text-xs"></i> الدعم</button>
+<button onclick="navigateTo('dashboard')" data-nav="dashboard" class="nav-link"><i class="fa-solid fa-user text-xs"></i> حسابي</button>
+<button onclick="navigateTo('admin')" data-nav="admin" class="nav-link !text-gold border border-gold/40 bg-gold/10"><i class="fa-solid fa-crown text-xs"></i> ⚙️ لوحة الإدارة</button>
+</nav>
+<div class="hidden md:flex items-center gap-2">
+<button onclick="copyIP()" class="btn-ghost rounded-xl px-3 py-2 text-[12px] font-bold flex items-center gap-2" title="اضغط لنسخ الآيبي"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span><span class="font-orbit" dir="ltr" id="ipLabel1">play.oneday-rp.com</span><i class="fa-solid fa-copy text-gold"></i></button>
+<button onclick="toggleCart(true)" class="relative btn-ghost rounded-xl w-[42px] h-[42px] flex items-center justify-center cursor-pointer" title="عرض السلة"><i class="fa-solid fa-cart-shopping text-white"></i><span id="cartCount" class="absolute -top-1.5 -left-1.5 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-black bg-gold text-black flex items-center justify-center">0</span></button>
+<div id="authNavArea" class="flex items-center gap-2"><button onclick="openAuth('login')" id="authBtnDesk" class="btn-ghost rounded-xl px-4 py-2 text-[13px] font-extrabold cursor-pointer">دخول</button></div>
+<button onclick="navigateTo('join')" class="btn-gold rounded-xl px-5 py-2 text-[13px]"><i class="fa-solid fa-play text-xs"></i> ابدأ اللعب</button>
+</div>
+<div class="flex xl:hidden items-center gap-2">
+<button onclick="toggleCart(true)" class="relative btn-ghost rounded-xl w-[40px] h-[40px] flex items-center justify-center"><i class="fa-solid fa-cart-shopping"></i><span id="cartCountM" class="absolute -top-1 -left-1 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-black bg-gold text-black flex items-center justify-center">0</span></button>
+<button onclick="toggleMobile(true)" class="btn-ghost rounded-xl w-[40px] h-[40px] flex items-center justify-center text-lg cursor-pointer"><i class="fa-solid fa-bars"></i></button>
+</div>
+</div>
+</div>
+<div class="hidden md:block border-t border-line/60 bg-black/40">
+<div class="max-w-[1280px] mx-auto px-6 py-1.5 flex items-center justify-between text-[11.5px] font-bold text-muted">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-2"><span class="status-dot" id="hdrDot"></span><b class="text-green-400 font-extrabold" id="srvState">متصل الآن</b> — <span id="onlineHdr" class="font-orbit text-white">524</span> لاعب داخل اللعبة</span>
+<span class="hidden lg:inline">• سعة السيرفر: <b class="font-orbit text-white" id="srvMaxCap">640</b></span>
+<span class="hidden lg:inline">• إصدار المدينة: <b class="font-orbit text-gold">Season 3 v2.5</b></span>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="navigateTo('admin')" class="text-gold hover:underline cursor-pointer flex items-center gap-1.5"><i class="fa-solid fa-sliders"></i> لوحة التحكم الشاملة (تعديل فوري بدون كود)</button>
+<span>•</span>
+<button onclick="openDiscord()" class="text-[#8b95ff] hover:underline cursor-pointer flex items-center gap-1"><i class="fa-brands fa-discord"></i> مجتمع الديسكورد (48K)</button>
+</div>
+</div>
+</div>
+</header>
+
+<div id="mobileMenu" class="fixed inset-0 z-[80] hidden">
+<div class="absolute inset-0 modal-bg" onclick="toggleMobile(false)"></div>
+<div class="absolute top-0 bottom-0 right-0 w-[310px] max-w-[85vw] glass border-l border-line p-6 flex flex-col gap-4 overflow-y-auto">
+<div class="flex items-center justify-between pb-3 border-b border-line">
+<div class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl flex items-center justify-center font-orbit font-black text-black" style="background:linear-gradient(135deg,var(--gold2),#FF6B00)">OD</div><div class="font-orbit font-black text-white" dir="ltr">ONE DAY RP</div></div>
+<button onclick="toggleMobile(false)" class="w-8 h-8 rounded-lg bg-white/5 border border-line flex items-center justify-center text-white"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<nav class="flex flex-col gap-2 font-extrabold text-sm">
+<button onclick="navigateTo('home');toggleMobile(false)" class="p-3 rounded-xl bg-white/5 border border-line text-right flex items-center gap-2"><i class="fa-solid fa-house text-gold"></i> الرئيسية</button>
+<button onclick="navigateTo('store');toggleMobile(false)" class="p-3 rounded-xl border border-gold/40 bg-gold/10 text-right flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-gold"></i> المتجر والباقات</button>
+<button onclick="navigateTo('join');toggleMobile(false)" class="p-3 rounded-xl bg-white/5 border border-line text-right flex items-center gap-2"><i class="fa-solid fa-gamepad text-neon"></i> التسجيل والتقديم</button>
+<button onclick="navigateTo('rules');toggleMobile(false)" class="p-3 rounded-xl bg-white/5 border border-line text-right flex items-center gap-2"><i class="fa-solid fa-scale-balanced text-muted"></i> القوانين</button>
+<button onclick="navigateTo('news');toggleMobile(false)" class="p-3 rounded-xl bg-white/5 border border-line text-right flex items-center gap-2"><i class="fa-solid fa-newspaper text-muted"></i> الأخبار</button>
+<button onclick="navigateTo('support');toggleMobile(false)" class="p-3 rounded-xl bg-white/5 border border-line text-right flex items-center gap-2"><i class="fa-solid fa-headset text-muted"></i> الدعم الفني</button>
+<button onclick="navigateTo('dashboard');toggleMobile(false)" class="p-3 rounded-xl bg-white/5 border border-line text-right flex items-center gap-2"><i class="fa-solid fa-user text-muted"></i> حسابي</button>
+<button onclick="navigateTo('admin');toggleMobile(false)" class="p-3 rounded-xl bg-violet/20 border border-violet-500/40 text-violet-300 text-right flex items-center gap-2"><i class="fa-solid fa-crown text-gold"></i> ⚙️ لوحة الإدارة الشاملة</button>
+</nav>
+<div class="grid grid-cols-2 gap-2 mt-auto pt-4 border-t border-line">
+<button onclick="toggleMobile(false);openAuth('login')" class="btn-ghost rounded-xl py-2.5 font-extrabold text-xs">دخول</button>
+<button onclick="toggleMobile(false);navigateTo('join')" class="btn-gold rounded-xl py-2.5 font-extrabold text-xs">ابدأ الآن</button>
+</div>
+</div>
+</div>
+
+<main id="app" class="relative min-h-[75vh]">
+
+<div id="page-home" class="page active">
+<section class="relative overflow-hidden">
+<div class="absolute inset-0">
+<img id="heroBgImg" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=2074&auto=format&fit=crop" class="w-full h-full object-cover" alt="Hero">
+<div class="absolute inset-0 hero-overlay"></div>
+<div class="absolute inset-0 bg-grid opacity-60"></div>
+</div>
+<div class="relative max-w-[1280px] mx-auto px-4 lg:px-6 pt-12 pb-12 lg:pt-16 lg:pb-16 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center">
+<div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="badge-line"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span><span id="heroSeasonBadge">الموسم الثالث • LIVE NOW</span></span>
+<span class="badge-line !bg-white/5 !text-white !border-white/15"><i class="fa-solid fa-users text-gold"></i> <span id="heroOnline" class="font-orbit font-bold">524</span> لاعب متصل</span>
+<span class="badge-line !bg-violet/20 !text-violet-200 !border-violet/40">#1 سيرفر رول بلاي عربي</span>
+</div>
+<h1 class="font-changa font-extrabold leading-[1.1]" style="font-size:clamp(32px,5.5vw,64px)">
+<span class="font-orbit block text-white" dir="ltr">ONE DAY <span class="gold-text">RP</span></span>
+<span class="block text-white mt-1" id="heroTitle">عِش حياة ثانية <span class="gold-text">بقوانينك أنت</span></span>
+</h1>
+<p class="mt-4 text-[#C8CCDB] text-[15px] leading-8 max-w-[620px]" id="heroDesc">أضخم سيرفر حياة واقعية عربي بنظام اقتصادي متكامل، وظائف تفاعلية، عصابات وقوات أمنية متطورة. يمكنك الآن تعديل وإدارة كافة أقسام الموقع واللاعبين والأسعار بضغطة زر من لوحة التحكم!</p>
+<div class="flex flex-wrap gap-3 mt-7">
+<button onclick="navigateTo('join')" class="btn-gold rounded-2xl px-7 py-4 text-base font-extrabold"><i class="fa-solid fa-rocket"></i> انضم إلينا الآن مجاناً</button>
+<button onclick="openVideo()" class="btn-ghost rounded-2xl px-6 py-4 font-extrabold"><span class="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center"><i class="fa-solid fa-play text-gold text-xs"></i></span> مشاهدة العرض الرسمي</button>
+</div>
+<div class="mt-7 glass rounded-2xl p-3.5 flex flex-col sm:flex-row gap-3 max-w-[620px] shine-border">
+<div class="flex items-center gap-3 flex-1 bg-black/40 border border-line rounded-xl px-4 py-3">
+<i class="fa-solid fa-server text-gold text-lg"></i>
+<div class="min-w-0"><div class="text-[11px] text-muted font-bold">عنوان اتصال السيرفر (Direct IP)</div><div class="font-orbit font-bold text-sm text-white truncate" dir="ltr" id="ipLabel3">play.oneday-rp.com</div></div>
+</div>
+<button onclick="copyIP()" class="btn-gold rounded-xl px-6 py-3 font-extrabold text-sm"><i class="fa-solid fa-copy"></i> نسخ IP</button>
+<button onclick="navigateTo('admin')" class="btn-ghost rounded-xl px-4 py-3 font-extrabold text-xs !border-gold/40 !text-gold">⚙️ الإدارة</button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-3 rounded-[28px] opacity-40 blur-2xl" style="background:linear-gradient(135deg,rgba(var(--gold-rgb),.35),rgba(255,46,77,.3))"></div>
+<div class="relative glass rounded-[26px] overflow-hidden shine-border">
+<div class="relative h-[220px]">
+<img id="heroCardImg" src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2013&auto=format&fit=crop" class="w-full h-full object-cover" alt="City">
+<div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 20%,rgba(11,13,24,.95))"></div>
+<div class="absolute top-3 right-3 left-3 flex justify-between items-center">
+<span class="chip bg-green-500/20 text-green-300 border border-green-500/40"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> حالة السيرفر: مستقر</span>
+<span class="chip bg-black/70 text-white border border-white/20 font-orbit" dir="ltr">Ping: 18ms</span>
+</div>
+<div class="absolute bottom-3 right-4 left-4 flex justify-between items-end">
+<div><div class="font-changa font-extrabold text-xl text-white">مدينة لوس سانتوس</div><div class="text-[12px] text-muted font-bold">أنظمة مخصصة وتطوير حصري 100%</div></div>
+<div class="text-left"><div class="font-orbit text-2xl font-black gold-text" id="sideOnline">524</div><div class="text-[11px] text-muted">متصل الآن</div></div>
+</div>
+</div>
+<div class="p-4 grid grid-cols-3 gap-2 text-center">
+<div class="bg-black/40 border border-line rounded-2xl p-3"><div class="font-orbit font-black text-base text-white" id="statMembersCount">48,500+</div><div class="text-[11px] text-muted font-bold">عضو بالديسكورد</div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-3"><div class="font-orbit font-black text-base text-gold" id="statCapacity">640</div><div class="text-[11px] text-muted font-bold">السعة القصوى</div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-3"><div class="font-orbit font-black text-base text-green-400">99.9%</div><div class="text-[11px] text-muted font-bold">نسبة الاستقرار</div></div>
+</div>
+<div class="px-4 pb-4">
+<div class="rounded-2xl p-4 border border-gold/30" style="background:linear-gradient(135deg,rgba(var(--gold-rgb),.12),rgba(255,46,77,.1))">
+<div class="flex justify-between items-center text-[13px] font-extrabold"><span class="flex items-center gap-1.5"><i class="fa-solid fa-gift text-gold"></i> عرض تدشين الموسم</span><span class="text-muted text-[11px]">متبقي على الانتهاء</span></div>
+<div class="grid grid-cols-4 gap-2 text-center mt-3" dir="ltr">
+<div class="bg-black/60 rounded-xl py-2 border border-white/10"><div id="cdD" class="font-orbit font-black text-white text-base">02</div><div class="text-[9px] text-muted font-bold">DAYS</div></div>
+<div class="bg-black/60 rounded-xl py-2 border border-white/10"><div id="cdH" class="font-orbit font-black text-white text-base">14</div><div class="text-[9px] text-muted font-bold">HOURS</div></div>
+<div class="bg-black/60 rounded-xl py-2 border border-white/10"><div id="cdM" class="font-orbit font-black text-white text-base">36</div><div class="text-[9px] text-muted font-bold">MIN</div></div>
+<div class="bg-black/60 rounded-xl py-2 border border-gold/40"><div id="cdS" class="font-orbit font-black text-gold text-base">08</div><div class="text-[9px] text-muted font-bold">SEC</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="max-w-[1280px] mx-auto px-4 lg:px-6 py-10">
+<div class="glass rounded-3xl p-6 lg:p-8 shine-border grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="badge-line">🚀 لوحة تحكم ذكية وشاملة</span>
+<h2 class="section-title mt-3">تحكم بـ <span class="gold-text">كل صغيرة وكبيرة</span> في موقعك وسيرفرك</h2>
+<p class="text-muted leading-7 text-[14px] mt-3">من لوحة الإدارة المتطورة يمكنك حظر وفك حظر اللاعبين مع تحديد الأسباب، إضافة وتعديل أسعار المتجر بنسب مئوية فورية، توزيع مكافآت جماعية وفردية، تعديل نصوص وخلفية وألوان الموقع مباشرة بدون لمس سطر كود واحد!</p>
+<div class="grid sm:grid-cols-2 gap-3 mt-5">
+<div class="bg-black/40 border border-line rounded-2xl p-3 flex gap-3 items-center"><i class="fa-solid fa-user-slash text-crimson text-xl"></i><div><div class="font-bold text-[13px] text-white">حظر وفك حظر ومكافآت</div><div class="text-[11px] text-muted">إدارة فورية لملفات اللاعبين ورصيدهم</div></div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-3 flex gap-3 items-center"><i class="fa-solid fa-tags text-green-400 text-xl"></i><div><div class="font-bold text-[13px] text-white">تحكم أسعار وعروض فلاش</div><div class="text-[11px] text-muted">زيادة أو تخفيض الأسعار بضغطة واحدة</div></div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-3 flex gap-3 items-center"><i class="fa-solid fa-palette text-violet-400 text-xl"></i><div><div class="font-bold text-[13px] text-white">محرر المظهر والنصوص</div><div class="text-[11px] text-muted">تغيير الصور والخلفيات والعناوين</div></div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-3 flex gap-3 items-center"><i class="fa-solid fa-chart-pie text-neon text-xl"></i><div><div class="font-bold text-[13px] text-white">إحصائيات وتقارير المبيعات</div><div class="text-[11px] text-muted">فواتير ومبيعات وتذاكر لحظية</div></div></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-6">
+<button onclick="navigateTo('admin')" class="btn-gold rounded-xl px-6 py-3 font-extrabold text-sm"><i class="fa-solid fa-sliders"></i> فتح لوحة الإدارة الآن</button>
+<button onclick="openAdminHelp()" class="btn-ghost rounded-xl px-5 py-3 font-extrabold text-sm"><i class="fa-solid fa-circle-question"></i> دليل استخدام اللوحة</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="glass rounded-2xl p-5 border !border-gold/30"><div class="text-gold text-2xl mb-2"><i class="fa-solid fa-bolt"></i></div><div class="font-extrabold text-base text-white">تعديلات فورية</div><div class="text-[12px] text-muted mt-1 leading-5">كل زر يعمل مباشرة ويحفظ التغيير على المتجر والموقع تلقائياً.</div></div>
+<div class="glass rounded-2xl p-5 border !border-neon/30"><div class="text-neon text-2xl mb-2"><i class="fa-solid fa-shield-halved"></i></div><div class="font-extrabold text-base text-white">نظام التوثيق KYC</div><div class="text-[12px] text-muted mt-1 leading-5">قبول ورفض طلبات Whitelist واللاعبين الجدد بضغطة زر.</div></div>
+<div class="glass rounded-2xl p-5 border !border-crimson/30"><div class="text-crimson text-2xl mb-2"><i class="fa-solid fa-bullhorn"></i></div><div class="font-extrabold text-base text-white">بث جماعي مباشر</div><div class="text-[12px] text-muted mt-1 leading-5">أرسل إشعارات عاجلة تظهر لجميع الزوار أعلى الموقع.</div></div>
+<div class="glass rounded-2xl p-5 border !border-violet-500/30 bg-violet/5"><div class="font-orbit font-black text-2xl text-gold">100%</div><div class="font-extrabold text-base text-white">جاهز ومربوط</div><div class="text-[12px] text-muted mt-1 leading-5">لا توجد أزرار معطلة أو صفحات مفقودة.</div></div>
+</div>
+</div>
+</section>
+
+<section class="border-y border-line py-12" style="background:#090B14">
+<div class="max-w-[1280px] mx-auto px-4 lg:px-6">
+<div class="text-center max-w-[650px] mx-auto">
+<span class="badge-line">TOP PACKAGES</span>
+<h2 class="section-title mt-2">باقات <span class="gold-text">VIP</span> الأكثر طلباً</h2>
+<div class="hr-gold mx-auto my-3"></div>
+<p class="text-muted text-xs">احصل على سيارات حصرية، أولوية دخول، ورصيد فوري داخل السيرفر</p>
+</div>
+<div class="grid md:grid-cols-3 gap-6 mt-8" id="homePackages"></div>
+<div class="text-center mt-8"><button onclick="navigateTo('store')" class="btn-ghost rounded-2xl px-8 py-3.5 font-extrabold text-sm">تصفح كافة منتجات المتجر <i class="fa-solid fa-arrow-left mr-2 text-gold"></i></button></div>
+</div>
+</section>
+</div>
+
+<div id="page-store" class="page">
+<section class="relative py-12 text-center border-b border-line overflow-hidden">
+<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20" alt="Store">
+<div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(6,7,13,.7),#06070D)"></div>
+<div class="relative max-w-[800px] mx-auto px-4">
+<span class="badge-line"><i class="fa-solid fa-bag-shopping"></i> ONEDAY OFFICIAL STORE</span>
+<h1 class="section-title mt-3">متجر ون داي <span class="gold-text">الرسمي</span></h1>
+<p class="text-muted text-sm mt-2">تسليم فوري بعد الدفع • دعم طرق الدفع السعودية والخليجية (مدى، Apple Pay، STC Pay، فيزا)</p>
+<div class="inline-block mt-3 bg-gold/10 border border-gold/40 px-4 py-1.5 rounded-full text-xs font-bold text-gold" id="storePromoHint">كود ONEDAY30 يمنحك خصماً فورياً 30% في السلة!</div>
+</div>
+</section>
+<div class="max-w-[1280px] mx-auto px-4 lg:px-6 py-8">
+<div class="flex flex-wrap gap-2 justify-center mb-6" id="storeTabs">
+<button onclick="setStoreTab('all')" data-stab="all" class="tab-btn active border border-line rounded-xl px-5 py-2.5 text-xs font-bold">الكل</button>
+<button onclick="setStoreTab('vip')" data-stab="vip" class="tab-btn border border-line rounded-xl px-5 py-2.5 text-xs font-bold text-muted">👑 رتب VIP</button>
+<button onclick="setStoreTab('coins')" data-stab="coins" class="tab-btn border border-line rounded-xl px-5 py-2.5 text-xs font-bold text-muted">💰 عملات ونقود</button>
+<button onclick="setStoreTab('cars')" data-stab="cars" class="tab-btn border border-line rounded-xl px-5 py-2.5 text-xs font-bold text-muted">🚗 سيارات حصرية</button>
+<button onclick="setStoreTab('estate')" data-stab="estate" class="tab-btn border border-line rounded-xl px-5 py-2.5 text-xs font-bold text-muted">🏠 عقارات وقصور</button>
+<button onclick="setStoreTab('service')" data-stab="service" class="tab-btn border border-line rounded-xl px-5 py-2.5 text-xs font-bold text-muted">🛠️ خدمات وتغيير هوية</button>
+</div>
+<div class="flex flex-col sm:flex-row gap-3 items-center glass rounded-2xl p-3.5 mb-8 shine-border">
+<div class="flex items-center gap-2 flex-1 w-full bg-black/40 border border-line rounded-xl px-3.5"><i class="fa-solid fa-magnifying-glass text-muted"></i><input id="storeSearch" oninput="renderStore()" class="bg-transparent flex-1 py-2.5 text-sm font-bold placeholder:text-muted outline-none text-white" placeholder="ابحث عن باقة، سيارة، عملات..."></div>
+<select id="storeSort" onchange="renderStore()" class="bg-black/50 border border-line rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none"><option value="pop">الأكثر طلباً وشعبية</option><option value="low">السعر: من الأقل للأعلى</option><option value="high">السعر: من الأعلى للأقل</option></select>
+<button onclick="toggleCart(true)" class="btn-gold rounded-xl px-5 py-2.5 text-xs font-extrabold whitespace-nowrap"><i class="fa-solid fa-cart-shopping"></i> عرض السلة (<span id="cartCount2">0</span>)</button>
+</div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="storeGrid"></div>
+<div class="mt-14 grid lg:grid-cols-2 gap-6">
+<div class="glass rounded-3xl p-6 lg:p-7 shine-border">
+<div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-xl bg-gold/15 text-gold flex items-center justify-center text-lg"><i class="fa-solid fa-bolt"></i></div><div><h3 class="font-changa font-extrabold text-lg">شحن سريع برقم الآيدي (ID)</h3><p class="text-muted text-xs">شحن مباشر لحسابك داخل سيرفر فايف إم خلال ثوانٍ</p></div></div>
+<div class="grid sm:grid-cols-2 gap-3 mt-4">
+<div><label class="lbl">ID اللاعب داخل السيرفر</label><input id="topupId" class="input font-orbit text-sm" placeholder="مثال: 10482" dir="ltr"></div>
+<div><label class="lbl">اختر باقة الشحن</label><select id="topupPack" class="input text-xs font-bold"><option value="50|50000">50 ر.س = 50,000$ نقداً</option><option value="100|125000">100 ر.س = 125,000$ (بونص 25K)</option><option value="200|280000">200 ر.س = 280,000$ (بونص 80K)</option><option value="500|800000">500 ر.س = 800,000$ (باقة الحيتان 🐋)</option></select></div>
+</div>
+<button onclick="doTopup()" class="btn-gold w-full rounded-xl py-3.5 mt-4 font-extrabold text-sm"><i class="fa-solid fa-shield-halved"></i> تأكيد ودفع الشحن السريع</button>
+</div>
+<div class="glass rounded-3xl p-6 lg:p-7 shine-border flex flex-col">
+<div class="flex items-center justify-between mb-3"><h3 class="font-changa font-extrabold text-lg flex items-center gap-2"><i class="fa-solid fa-receipt text-gold"></i> سجل المشتريات الخاصة بك</h3><span class="text-xs text-muted font-bold" id="myOrdersCount">0 طلب</span></div>
+<div id="ordersList" class="space-y-2.5 flex-1 max-h-[260px] overflow-y-auto pr-1"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="page-join" class="page">
+<section class="py-12 text-center border-b border-line">
+<span class="badge-line"><i class="fa-solid fa-id-card"></i> WHITELIST & REGISTRATION</span>
+<h1 class="section-title mt-3">التقديم والانضمام إلى <span class="gold-text">سيرفر ون داي</span></h1>
+<p class="text-muted text-sm mt-2 max-w-[600px] mx-auto">سجل بياناتك لدخول اختبار الرول بلاي والحصول على مكافأة البداية (20,000$ + سيارة وسكن مجاني)</p>
+</section>
+<div class="max-w-[860px] mx-auto px-4 py-8">
+<div class="glass rounded-3xl p-6 lg:p-8 shine-border">
+<div class="flex items-center justify-between border-b border-line pb-4 mb-5">
+<div><h3 class="font-changa font-extrabold text-xl">نموذج التقديم الرسمي</h3><p class="text-xs text-muted">يتم إرسال النموذج تلقائياً للوحة الإدارة للمراجعة والاعتماد</p></div>
+<span class="chip bg-gold/15 text-gold border border-gold/30">مفتوح الآن</span>
+</div>
+<div class="grid sm:grid-cols-2 gap-4">
+<div><label class="lbl">الاسم الثلاثي للشخصية داخل اللعبة</label><input id="rgName" class="input text-sm" placeholder="مثال: فهد بن سلطان العتيبي"></div>
+<div><label class="lbl">اسم حساب الديسكورد (Discord Tag)</label><input id="rgDiscord" class="input text-sm font-orbit" placeholder="fahad_99" dir="ltr"></div>
+<div><label class="lbl">البريد الإلكتروني للتواصل</label><input id="rgEmail" class="input text-sm" placeholder="yourname@gmail.com" dir="ltr"></div>
+<div><label class="lbl">العمر الحقيقي</label><select id="rgAge" class="input text-sm font-bold"><option>18 - 21 سنة</option><option>22 - 27 سنة</option><option>28 سنة فما فوق</option></select></div>
+<div class="sm:col-span-2"><label class="lbl">ما هي خبرتك السابقة في الرول بلاي (RP) ولماذا اخترت ون داي؟</label><textarea id="rgWhy" rows="3" class="input text-sm" placeholder="اكتب نبذة عن قصة شخصيتك وأسلوب لعبك..."></textarea></div>
+</div>
+<button onclick="submitPreReg()" class="btn-gold w-full rounded-xl py-4 mt-6 font-extrabold text-sm"><i class="fa-solid fa-paper-plane"></i> إرسال طلب التقديم للإدارة</button>
+<div id="rgResult" class="hidden mt-4 rounded-2xl p-4 border border-green-500/40 bg-green-500/10 text-sm font-bold text-green-300"></div>
+<div class="grid sm:grid-cols-3 gap-3 mt-6 text-center">
+<div class="bg-black/40 border border-line rounded-2xl p-4"><div class="font-orbit font-black text-gold text-lg" id="seatsLeft">23</div><div class="text-xs text-muted font-bold mt-1">مقعد متبقي في الدفعة</div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><div class="font-orbit font-black text-white text-lg">20,000$ + سيارة</div><div class="text-xs text-muted font-bold mt-1">مكافأة ترحيبية فورية</div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><div class="font-orbit font-black text-green-400 text-lg">&lt; 15 دقيقة</div><div class="text-xs text-muted font-bold mt-1">سرعة مراجعة الطلب</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="page-rules" class="page">
+<section class="py-12 text-center border-b border-line">
+<span class="badge-line"><i class="fa-solid fa-book-bookmark"></i> CODE OF CONDUCT</span>
+<h1 class="section-title mt-3">دستور وقوانين <span class="gold-text">ون داي ار بي</span></h1>
+<p class="text-muted text-sm mt-2 max-w-[550px] mx-auto">القوانين وُضعت لضمان تجربة لعب واقعية وممتعة وعادلة للجميع</p>
+<div class="max-w-[550px] mx-auto mt-6 px-4"><div class="flex items-center gap-2 bg-black/40 border border-line rounded-xl px-4 py-2.5"><i class="fa-solid fa-magnifying-glass text-muted"></i><input id="ruleSearch" oninput="renderRules()" class="bg-transparent flex-1 text-sm font-bold outline-none text-white placeholder:text-muted" placeholder="ابحث في القوانين (مثال: RDM, NLR, سرقات)..."></div></div>
+<div class="flex flex-wrap gap-2 justify-center mt-5" id="ruleTabs">
+<button onclick="setRuleFilter('all')" data-rtab="all" class="tab-btn active border border-line rounded-xl px-4 py-2 text-xs font-bold">الكل</button>
+<button onclick="setRuleFilter('general')" data-rtab="general" class="tab-btn border border-line rounded-xl px-4 py-2 text-xs font-bold text-muted">قوانين عامة</button>
+<button onclick="setRuleFilter('rp')" data-rtab="rp" class="tab-btn border border-line rounded-xl px-4 py-2 text-xs font-bold text-muted">أساسيات الرول بلاي</button>
+<button onclick="setRuleFilter('crime')" data-rtab="crime" class="tab-btn border border-line rounded-xl px-4 py-2 text-xs font-bold text-muted">العصابات والجرائم</button>
+<button onclick="setRuleFilter('police')" data-rtab="police" class="tab-btn border border-line rounded-xl px-4 py-2 text-xs font-bold text-muted">الأمن والطوارئ</button>
+<button onclick="setRuleFilter('punish')" data-rtab="punish" class="tab-btn border border-line rounded-xl px-4 py-2 text-xs font-bold text-muted">لائحة العقوبات</button>
+</div>
+</section>
+<div class="max-w-[950px] mx-auto px-4 py-8"><div id="rulesList" class="space-y-3"></div></div>
+</div>
+
+<div id="page-news" class="page">
+<section class="py-12 text-center border-b border-line"><span class="badge-line"><i class="fa-solid fa-newspaper"></i> LATEST UPDATES</span><h1 class="section-title mt-3">أخبار وفعاليات <span class="gold-text">المدينة</span></h1><p class="text-muted text-sm mt-2">تابع أحدث الباتشات، الفعاليات الأسبوعية، والجوائز الكبرى</p></section>
+<div class="max-w-[1100px] mx-auto px-4 py-8"><div id="newsFeatured"></div><div class="grid md:grid-cols-3 gap-5 mt-6" id="newsGridPage"></div></div>
+</div>
+
+<div id="page-support" class="page">
+<section class="py-12 text-center border-b border-line"><span class="badge-line"><i class="fa-solid fa-headset"></i> 24/7 DEDICATED SUPPORT</span><h1 class="section-title mt-3">مركز المساعدة و <span class="gold-text">الدعم الفني</span></h1><p class="text-muted text-sm mt-2">طاقم إداري مخصص على مدار الساعة لمساعدتك وحل مشاكلك</p></section>
+<div class="max-w-[1050px] mx-auto px-4 py-8 grid lg:grid-cols-2 gap-6">
+<div class="glass rounded-3xl p-6 lg:p-7 shine-border flex flex-col justify-between">
+<div>
+<button onclick="openDiscord()" class="w-full btn-discord text-white rounded-2xl py-3.5 font-extrabold flex items-center justify-center gap-2 mb-6"><i class="fa-brands fa-discord text-lg"></i> الدخول لدعم الديسكورد الفوري (48K)</button>
+<h4 class="font-changa font-extrabold text-lg flex items-center gap-2"><i class="fa-solid fa-envelope-open-text text-gold"></i> فتح تذكرة عبر الموقع</h4>
+<p class="text-xs text-muted mt-1 mb-4">ستصل تذكرتك مباشرة للوحة تحكم الإدارة وسيتم الرد عليك</p>
+<div class="space-y-3">
+<div><label class="lbl">اسمك أو ID الشخصية</label><input id="tkName" class="input text-sm" placeholder="مثال: فهد_العتيبي (10482)"></div>
+<div><label class="lbl">عنوان المشكلة</label><input id="tkTitle" class="input text-sm" placeholder="مثال: استفسار عن سيارة المتجر"></div>
+<div><label class="lbl">تفاصيل التذكرة</label><textarea id="tkMsg" rows="3" class="input text-sm" placeholder="اكتب تفاصيل ما حدث معك..."></textarea></div>
+</div>
+</div>
+<button onclick="submitTicket()" class="btn-gold w-full rounded-xl py-3.5 mt-5 font-extrabold text-sm"><i class="fa-solid fa-paper-plane"></i> إرسال التذكرة للإدارة</button>
+</div>
+<div class="glass rounded-3xl p-6 lg:p-7 shine-border flex flex-col">
+<div class="flex items-center justify-between mb-4 border-b border-line pb-3"><h4 class="font-changa font-extrabold text-lg flex items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-neon"></i> التذاكر المسجلة</h4><span class="chip bg-white/10 text-white" id="ticketsCountLabel">0 تذكرة</span></div>
+<div id="ticketsList" class="space-y-3 flex-1 overflow-y-auto max-h-[380px] pr-1"></div>
+</div>
+</div>
+</div>
+
+<div id="page-dashboard" class="page">
+<div class="max-w-[950px] mx-auto px-4 py-10">
+<div id="dashGuest" class="glass rounded-3xl p-10 text-center shine-border">
+<div class="w-16 h-16 mx-auto rounded-2xl bg-gold/15 border border-gold/30 flex items-center justify-center text-2xl text-gold mb-3"><i class="fa-solid fa-user-lock"></i></div>
+<h2 class="font-changa font-extrabold text-2xl">يرجى تسجيل الدخول لعرض حسابك</h2>
+<p class="text-muted text-xs mt-2 max-w-[450px] mx-auto">قم بتسجيل الدخول للاطلاع على رصيدك، مشترياتك، المكافأة اليومية، ورابط الإحالة الخاص بك</p>
+<div class="flex justify-center gap-3 mt-6"><button onclick="openAuth('login')" class="btn-gold rounded-xl px-7 py-3 text-sm font-extrabold">تسجيل الدخول</button><button onclick="openAuth('register')" class="btn-ghost rounded-xl px-7 py-3 text-sm font-extrabold">إنشاء حساب جديد</button></div>
+</div>
+<div id="dashUser" class="hidden space-y-5">
+<div class="glass rounded-3xl p-6 flex flex-col md:flex-row gap-5 items-center shine-border">
+<div class="w-20 h-20 rounded-2xl flex items-center justify-center font-orbit font-black text-3xl text-black shadow-lg" style="background:linear-gradient(135deg,var(--gold2),#FF6B00)" id="dashAvatar">F</div>
+<div class="flex-1 text-center md:text-right">
+<div class="flex items-center justify-center md:justify-start gap-2 flex-wrap"><span class="font-changa font-extrabold text-2xl text-white" id="dashName">فهد العتيبي</span><span id="dashRoleBadge" class="chip bg-gold text-black font-extrabold">VIP ذهبي</span><span id="dashKycBadge" class="chip bg-green-500/20 text-green-300 border border-green-500/30">موثق ✅</span></div>
+<div class="text-xs text-muted font-orbit mt-0.5" id="dashEmail" dir="ltr">fahad@oneday.gg</div>
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-2 text-xs"><span class="text-gold font-bold">رصيد النقاط: <b id="dashWallet2" class="font-orbit">1,200</b> نقطة</span><span class="text-muted">•</span><span class="text-muted" id="dashRef">كود الإحالة: <b class="font-orbit text-white">FAHAD-482</b> (دعا 12 لاعب)</span></div>
+</div>
+<div class="flex flex-col sm:flex-row md:flex-col gap-2 w-full md:w-auto">
+<button onclick="claimDaily()" class="btn-gold rounded-xl px-5 py-2.5 text-xs font-extrabold"><i class="fa-solid fa-gift"></i> استلام المكافأة اليومية</button>
+<button onclick="navigateTo('admin')" id="dashAdminBtn" class="hidden btn-ghost rounded-xl px-5 py-2 text-xs !border-violet-500/50 !bg-violet/20 !text-violet-200"><i class="fa-solid fa-crown"></i> فتح الإدارة</button>
+<button onclick="logout()" class="btn-ghost rounded-xl px-5 py-2 text-xs text-red-300">تسجيل الخروج</button>
+</div>
+</div>
+<div class="grid sm:grid-cols-3 gap-3">
+<div class="glass rounded-2xl p-4 text-center"><div class="text-xs text-muted font-bold">إجمالي المشتريات</div><div class="font-orbit font-black text-xl text-white mt-1" id="dashOrders">0</div></div>
+<div class="glass rounded-2xl p-4 text-center"><div class="text-xs text-muted font-bold">أموال اللعبة (كاش)</div><div class="font-orbit font-black text-xl text-green-400 mt-1" id="dashMoney">84,500$</div></div>
+<div class="glass rounded-2xl p-4 text-center"><div class="text-xs text-muted font-bold">الشخصيات المسجلة</div><div class="font-orbit font-black text-xl text-gold mt-1">2 / 4</div></div>
+</div>
+<div class="glass rounded-3xl p-6"><h4 class="font-changa font-extrabold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-gold"></i> مشترياتي الأخيرة</h4><div id="dashOrdersList" class="space-y-2"></div></div>
+</div>
+</div>
+</div>
+
+<div id="page-admin" class="page">
+<div class="max-w-[1380px] mx-auto px-4 lg:px-6 py-6">
+<div id="adminLock" class="glass rounded-3xl p-8 text-center shine-border max-w-[620px] mx-auto my-6">
+<div class="w-20 h-20 mx-auto rounded-3xl flex items-center justify-center text-3xl text-black font-black shadow-xl" style="background:linear-gradient(135deg,var(--gold2),#FF6B00)">⚙️</div>
+<h2 class="font-changa font-extrabold text-3xl mt-4">لوحة تحكم <span class="gold-text">الإدارة الشاملة</span></h2>
+<p class="text-muted text-[13.5px] leading-7 mt-3">تحكم كامل وسريع بدون كود: إدارة اللاعبين (حظر/فك حظر/مكافآت)، تعديل أسعار ومنتجات المتجر، إدارة العروض والكوبونات، تعديل نصوص وخلفية ومظهر الموقع، وإحصائيات المبيعات اللحظية.</p>
+<div class="glass rounded-2xl p-4 mt-5 text-right text-[13px] font-bold leading-7 border border-line">
+<div class="text-muted text-xs mb-1">بيانات الدخول الافتراضية للإدارة:</div>
+<div>البريد: <span class="font-orbit text-gold" dir="ltr">admin@oneday-rp.com</span></div>
+<div>كلمة المرور: <span class="font-orbit text-gold" dir="ltr">admin123</span></div>
+</div>
+<div class="grid sm:grid-cols-2 gap-3 mt-6">
+<button onclick="adminDemoLogin()" class="btn-gold rounded-xl py-3.5 font-extrabold text-sm"><i class="fa-solid fa-rocket"></i> دخول فوري مباشر كمدير</button>
+<button onclick="openAuth('login')" class="btn-ghost rounded-xl py-3.5 font-extrabold text-sm">دخول يدوي</button>
+</div>
+<button onclick="openAdminHelp()" class="mt-4 text-gold text-xs font-bold underline cursor-pointer inline-block">📖 شرح كيفية التحكم بجميع أقسام اللوحة خطوة بخطوة</button>
+</div>
+
+<div id="adminContent" class="hidden">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6 glass rounded-3xl p-5 shine-border">
+<div>
+<div class="flex items-center gap-2 flex-wrap"><span class="badge-line !bg-green-500/20 !text-green-300 !border-green-500/40"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> لوحة التحكم متصلة ومفعّلة ✅</span><span class="badge-new">النسخة الاحترافية</span></div>
+<h1 class="section-title !text-[26px] mt-2">أهلاً بك، <span class="gold-text" id="adminHello">المدير العام</span> 👋</h1>
+<p class="text-muted text-xs font-bold mt-1">جميع الأزرار والوظائف أدناه تعمل فورياً وتُحفظ تلقائياً في المتصفح.</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="glass rounded-xl px-3.5 py-2 text-xs font-bold flex items-center gap-2 border border-line"><span class="status-dot" id="adminDot"></span><span id="adminSrvLbl">السيرفر متصل</span></span>
+<button onclick="openAdminHelp()" class="btn-ghost rounded-xl px-3.5 py-2 text-xs font-bold"><i class="fa-solid fa-book"></i> الشرح</button>
+<button onclick="exportCSV()" class="btn-ghost rounded-xl px-3.5 py-2 text-xs font-bold"><i class="fa-solid fa-download"></i> تصدير CSV</button>
+<button onclick="resetDemo()" class="rounded-xl px-3.5 py-2 text-xs font-bold border border-red-500/40 text-red-300 hover:bg-red-500/10 cursor-pointer"><i class="fa-solid fa-rotate-left"></i> تصفير البيانات</button>
+<button onclick="logout()" class="btn-ghost rounded-xl px-3.5 py-2 text-xs text-red-300"><i class="fa-solid fa-power-off"></i> خروج</button>
+</div>
+</div>
+
+<div class="grid lg:grid-cols-[250px_1fr] gap-5 items-start">
+<div class="glass rounded-3xl p-3 flex lg:flex-col gap-1.5 overflow-x-auto lg:sticky lg:top-[120px] shine-border max-h-[80vh] overflow-y-auto">
+<button data-atab="overview" onclick="showAdminTab('overview')" class="atab active border border-line rounded-xl px-4 py-3 text-[13px] font-bold flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-chart-line text-xs ml-2"></i> نظرة عامة وإحصائيات</span></button>
+<button data-atab="users" onclick="showAdminTab('users')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-users text-xs ml-2"></i> إدارة اللاعبين</span><span id="admUsersCountBadge" class="chip bg-white/10 text-white font-orbit">0</span></button>
+<button data-atab="products" onclick="showAdminTab('products')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-tags text-xs ml-2"></i> المتجر والأسعار</span></button>
+<button data-atab="offers" onclick="showAdminTab('offers')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-percent text-xs ml-2"></i> الكوبونات والعروض</span></button>
+<button data-atab="orders" onclick="showAdminTab('orders')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-receipt text-xs ml-2"></i> فواتير وطلبات</span><span id="adminOrdersBadge" class="chip bg-gold text-black font-orbit">0</span></button>
+<button data-atab="site_content" onclick="showAdminTab('site_content')" class="atab border border-gold/40 rounded-xl px-4 py-3 text-[13px] font-bold text-gold flex items-center justify-between whitespace-nowrap bg-gold/5"><span><i class="fa-solid fa-pen-to-square text-xs ml-2"></i> تعديل نصوص الموقع</span><span class="badge-new">هام</span></button>
+<button data-atab="appearance" onclick="showAdminTab('appearance')" class="atab border border-violet-500/40 rounded-xl px-4 py-3 text-[13px] font-bold text-violet-200 flex items-center justify-between whitespace-nowrap bg-violet/5"><span><i class="fa-solid fa-palette text-xs ml-2"></i> مظهر الموقع</span></button>
+<button data-atab="kyc" onclick="showAdminTab('kyc')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-id-card text-xs ml-2"></i> طلبات التوثيق</span><span id="admKycBadge" class="chip bg-neon text-black font-orbit">0</span></button>
+<button data-atab="tickets" onclick="showAdminTab('tickets')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-headset text-xs ml-2"></i> تذاكر الدعم</span><span id="adminTicketsBadge" class="chip bg-crimson text-white font-orbit">0</span></button>
+<button data-atab="news" onclick="showAdminTab('news')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-newspaper text-xs ml-2"></i> نشر الأخبار</span></button>
+<button data-atab="live" onclick="showAdminTab('live')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-bullhorn text-xs ml-2"></i> البث المباشر</span></button>
+<button data-atab="settings" onclick="showAdminTab('settings')" class="atab border border-line rounded-xl px-4 py-3 text-[13px] font-bold text-muted flex items-center justify-between whitespace-nowrap"><span><i class="fa-solid fa-gear text-xs ml-2"></i> إعدادات عامة</span></button>
+</div>
+
+<div class="min-w-0 space-y-5">
+<div id="atab-overview" class="atab-pane">
+<div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
+<div class="glass rounded-2xl p-5 border !border-gold/25"><div class="flex justify-between items-center text-muted text-xs font-bold"><span>إجمالي الإيرادات</span><i class="fa-solid fa-money-bill-wave text-gold"></i></div><div class="font-orbit font-black text-2xl text-gold mt-2"><span id="stRevenue">0</span> <span class="text-xs">ر.س</span></div><div class="text-[11px] text-green-400 mt-1 font-bold">▲ محسوبة تلقائياً من الطلبات</div></div>
+<div class="glass rounded-2xl p-5"><div class="flex justify-between items-center text-muted text-xs font-bold"><span>إجمالي الطلبات</span><i class="fa-solid fa-bag-shopping text-neon"></i></div><div class="font-orbit font-black text-2xl text-white mt-2" id="stOrders">0</div><div class="text-[11px] text-muted mt-1 font-bold">منها <span id="stPending" class="text-gold">0</span> قيد الانتظار</div></div>
+<div class="glass rounded-2xl p-5"><div class="flex justify-between items-center text-muted text-xs font-bold"><span>اللاعبون المسجلون</span><i class="fa-solid fa-users text-violet-400"></i></div><div class="font-orbit font-black text-2xl text-white mt-2" id="stUsers">0</div><div class="text-[11px] text-green-400 mt-1 font-bold"><span id="stOnline">524</span> متصل الآن</div></div>
+<div class="glass rounded-2xl p-5"><div class="flex justify-between items-center text-muted text-xs font-bold"><span>التذاكر المفتوحة</span><i class="fa-solid fa-headset text-crimson"></i></div><div class="font-orbit font-black text-2xl text-crimson mt-2" id="stTickets">0</div><div class="text-[11px] text-muted mt-1 font-bold">استجابة سريعة</div></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-4 mt-4">
+<div class="glass rounded-3xl p-5"><h4 class="font-bold text-sm text-white mb-2 flex items-center gap-2"><i class="fa-solid fa-chart-line text-gold"></i> حركة المبيعات (آخر 7 أيام)</h4><div class="h-[210px]"><canvas id="chSales"></canvas></div></div>
+<div class="glass rounded-3xl p-5"><h4 class="font-bold text-sm text-white mb-2 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-neon"></i> نسبة المبيعات حسب القسم</h4><div class="h-[210px] flex justify-center"><canvas id="chCats"></canvas></div></div>
+</div>
+<div class="glass rounded-3xl p-5 mt-4 shine-border">
+<h4 class="font-bold text-sm text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-bolt text-gold"></i> إجراءات سريعة وفورية</h4>
+<div class="grid sm:grid-cols-3 gap-3">
+<div class="bg-black/40 border border-line rounded-2xl p-4"><label class="lbl">تعديل عدد المتصلين فورياً</label><div class="flex gap-2 items-center mt-2"><input id="setOnlineRange" type="range" min="0" max="640" value="524" oninput="quickOnline(this.value)" class="flex-1 accent-[#FFB800] cursor-pointer"><span id="setOnlineLbl" class="font-orbit font-black text-gold text-base min-w-[40px]">524</span></div></div>
+<div class="bg-black/40 border border-line rounded-2xl p-4 flex justify-between items-center"><div><div class="font-bold text-sm text-white">حالة تشغيل السيرفر</div><div class="text-xs text-muted font-bold mt-0.5" id="srvStateMiniLbl">متاح للجميع</div></div><button id="maintBtn" onclick="toggleMaintenance()" class="btn-gold rounded-xl px-4 py-2.5 text-xs font-extrabold">يعمل بنجاح ✅</button></div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><div class="font-bold text-sm text-white">توزيع مكافأة مالية للجميع</div><div class="flex gap-2 mt-2"><input id="globalReward" type="number" class="input !py-2 text-xs" placeholder="المبلغ (مثال: 5000$)"><button onclick="rewardAll()" class="btn-gold rounded-xl px-4 text-xs font-extrabold whitespace-nowrap">توزيع 🎁</button></div></div>
+</div>
+</div>
+<div class="glass rounded-3xl p-5 mt-4">
+<div class="flex justify-between items-center mb-3"><h4 class="font-bold text-sm text-white flex items-center gap-2"><i class="fa-solid fa-receipt text-gold"></i> أحدث العمليات والطلبات</h4><button onclick="showAdminTab('orders')" class="text-gold text-xs underline font-bold cursor-pointer">عرض كافة الفواتير</button></div>
+<div id="adminRecent" class="space-y-2"></div>
+</div>
+</div>
+
+<div id="atab-users" class="atab-pane hidden">
+<div class="glass rounded-3xl p-5 shine-border">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pb-4 border-b border-line">
+<div><h4 class="font-changa font-extrabold text-xl">👥 إدارة حسابات اللاعبين</h4><p class="text-xs text-muted">حظر، فك حظر، توزيع مكافآت، تغيير الرتبة، وتعديل أرصدة اللاعبين بضغطة زر</p></div>
+<div class="flex gap-2 w-full md:w-auto"><input id="admUserSearch" oninput="renderAdminUsers()" class="input !py-2 text-xs w-full md:!w-[220px]" placeholder="ابحث بالاسم أو البريد..."><button onclick="addTestUser()" class="btn-ghost rounded-xl px-3 py-2 text-xs font-bold whitespace-nowrap"><i class="fa-solid fa-user-plus"></i> + لاعب تجريبي</button></div>
+</div>
+<div id="adminUsersList" class="grid md:grid-cols-2 gap-4 mt-5"></div>
+</div>
+<div class="glass rounded-3xl p-5 mt-4">
+<div class="flex justify-between items-center mb-3"><h4 class="font-changa font-extrabold text-lg flex items-center gap-2"><i class="fa-solid fa-gavel text-crimson"></i> سجل العقوبات والحظر الرسمي (Ban Log)</h4><span class="chip bg-crimson/20 text-crimson border border-crimson/40" id="banLogCount">0 مخالفة</span></div>
+<div id="banLogList" class="space-y-2"></div>
+</div>
+</div>
+
+<div id="atab-products" class="atab-pane hidden">
+<div class="glass rounded-3xl p-5 shine-border">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pb-4 border-b border-line">
+<div><h4 class="font-changa font-extrabold text-xl">🛒 إدارة المنتجات والتحكم بالأسعار</h4><p class="text-xs text-muted">عدّل السعر مباشرة داخل الجدول، أو طبق زيادة/تخفيض جماعي بنسبة مئوية</p></div>
+<div class="flex gap-2 w-full md:w-auto"><input id="admProdSearch" oninput="renderAdminProducts()" class="input !py-2 text-xs w-full md:!w-[200px]" placeholder="ابحث عن منتج..."><button onclick="toggleNewProd(true)" class="btn-gold rounded-xl px-4 py-2 text-xs font-extrabold whitespace-nowrap"><i class="fa-solid fa-plus"></i> إضافة منتج</button></div>
+</div>
+<div class="flex flex-wrap gap-2 mt-4 items-center bg-black/40 p-3 rounded-2xl border border-line">
+<span class="text-xs font-extrabold text-muted ml-2">تحكم سريع بأسعار كافة المتجر:</span>
+<button onclick="adjustAllPrices(10)" class="btn-ghost rounded-xl px-3.5 py-1.5 text-xs font-bold !border-green-500/40 !text-green-300">+10% زيادة</button>
+<button onclick="adjustAllPrices(5)" class="btn-ghost rounded-xl px-3 py-1.5 text-xs font-bold !border-green-500/30">+5%</button>
+<button onclick="adjustAllPrices(-5)" class="btn-ghost rounded-xl px-3 py-1.5 text-xs font-bold !border-red-500/30">-5%</button>
+<button onclick="adjustAllPrices(-10)" class="btn-ghost rounded-xl px-3.5 py-1.5 text-xs font-bold !border-red-500/40 !text-red-300">-10% تخفيض</button>
+<button onclick="adjustAllPrices(-20)" class="btn-ghost rounded-xl px-3.5 py-1.5 text-xs font-bold !border-red-500/40 !text-red-300">-20% تخفيض كبير</button>
+<button onclick="resetPrices()" class="btn-ghost rounded-xl px-3.5 py-1.5 text-xs font-bold text-gold mr-auto">↺ استعادة الأسعار</button>
+</div>
+<div id="newProdBox" class="hidden bg-black/60 border border-gold/40 rounded-2xl p-4 mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div><label class="lbl">اسم المنتج / الباقة</label><input id="npName" class="input text-xs" placeholder="مثال: رولكس نادرة + كراج"></div>
+<div><label class="lbl">السعر بالريال (ر.س)</label><input id="npPrice" type="number" class="input text-xs" placeholder="مثال: 99"></div>
+<div><label class="lbl">السعر قبل الخصم (اختياري)</label><input id="npOld" type="number" class="input text-xs" placeholder="مثال: 150"></div>
+<div><label class="lbl">القسم</label><select id="npTab" class="input text-xs font-bold"><option value="vip">رتب VIP</option><option value="coins">عملات ونقود</option><option value="cars">سيارات</option><option value="estate">عقارات</option><option value="service">خدمات</option></select></div>
+<div class="sm:col-span-3"><label class="lbl">رابط الصورة (URL)</label><input id="npImg" class="input text-xs font-orbit" placeholder="https://images.unsplash.com/..." dir="ltr"></div>
+<div class="flex items-end gap-2"><button onclick="addProduct()" class="btn-gold flex-1 rounded-xl py-2.5 text-xs font-extrabold">حفظ ونشر ✅</button><button onclick="toggleNewProd(false)" class="btn-ghost rounded-xl px-3 py-2.5 text-xs">إلغاء</button></div>
+</div>
+<div class="overflow-x-auto rounded-2xl border border-line mt-4">
+<table class="w-full admin-table min-w-[760px]">
+<thead class="bg-black/60"><tr><th>المنتج والصورة</th><th>القسم</th><th>السعر الحالي (ر.س)</th><th>قبل الخصم</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+<tbody id="adminProductsBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="atab-offers" class="atab-pane hidden">
+<div class="glass rounded-3xl p-6 shine-border">
+<h4 class="font-changa font-extrabold text-xl">🏷️ العروض والكوبونات والخصومات التلقائية</h4>
+<p class="text-xs text-muted mt-1">أنشئ كوبونات ترويجية وحدد نسبة الخصم، أو فعّل عروض الفلاش على منتج محدد</p>
+<div class="grid lg:grid-cols-2 gap-4 mt-5">
+<div class="bg-black/40 border border-line rounded-2xl p-5">
+<div class="font-bold text-sm text-white flex items-center gap-2"><i class="fa-solid fa-tag text-gold"></i> كود الخصم العام في السلة</div>
+<div class="grid grid-cols-3 gap-2 mt-4">
+<div class="col-span-2"><label class="lbl">كود الخصم (Promo Code)</label><input id="offerCode" class="input font-orbit text-xs font-bold" dir="ltr" value="ONEDAY30"></div>
+<div><label class="lbl">النسبة %</label><input id="offerPct" type="number" class="input font-orbit text-xs font-bold text-center" value="30"></div>
+</div>
+<button onclick="saveOfferCode()" class="btn-gold w-full rounded-xl py-3 mt-4 text-xs font-extrabold">تحديث وحفظ كود الخصم 💾</button>
+</div>
+<div class="bg-black/40 border border-line rounded-2xl p-5">
+<div class="font-bold text-sm text-white flex items-center gap-2"><i class="fa-solid fa-bolt text-crimson"></i> تطبيق عرض فلاش فوري على منتج</div>
+<div class="grid grid-cols-3 gap-2 mt-4">
+<div class="col-span-2"><label class="lbl">اختر المنتج</label><select id="flashProd" class="input text-xs font-bold"></select></div>
+<div><label class="lbl">خصم %</label><input id="flashDisc" type="number" class="input font-orbit text-xs font-bold text-center" value="25"></div>
+</div>
+<button onclick="applyFlash()" class="btn-gold w-full rounded-xl py-3 mt-4 text-xs font-extrabold">تطبيق عرض الفلاش الآن ⚡</button>
+</div>
+</div>
+<div class="rounded-2xl border border-gold/30 p-4 mt-5 bg-gold/5"><div class="text-xs font-bold text-gold flex items-center gap-2"><i class="fa-solid fa-circle-check"></i> العروض والخصومات المفعلة حالياً</div><div id="activeOffers" class="mt-2 space-y-2"></div></div>
+</div>
+</div>
+
+<div id="atab-orders" class="atab-pane hidden">
+<div class="glass rounded-3xl p-5 shine-border">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-line">
+<div><h4 class="font-changa font-extrabold text-xl">🧾 فواتير وسجل طلبات الشراء</h4><p class="text-xs text-muted">قبول، رفض، واسترداد المبالغ مع تحديث رصيد وفواتير اللاعبين</p></div>
+<div class="flex gap-2"><select id="admOrderFilter" onchange="renderAdminOrders()" class="input !py-2 text-xs font-bold !w-auto"><option value="all">جميع الطلبات</option><option value="pending">قيد الانتظار</option><option value="done">مكتملة</option><option value="refunded">مستردة</option><option value="rejected">مرفوضة</option></select><button onclick="seedDemoOrders()" class="btn-ghost rounded-xl px-3 py-2 text-xs font-bold whitespace-nowrap">+ توليد طلبات للتجربة</button></div>
+</div>
+<div id="adminOrdersList" class="space-y-3 mt-4"></div>
+</div>
+</div>
+
+<div id="atab-site_content" class="atab-pane hidden">
+<div class="glass rounded-3xl p-6 shine-border">
+<div class="flex justify-between items-center pb-4 border-b border-line"><div><h4 class="font-changa font-extrabold text-xl flex items-center gap-2"><i class="fa-solid fa-pen-to-square text-gold"></i> تعديل نصوص وكتابات الموقع بالكامل</h4><p class="text-xs text-muted">عدّل عنوان الصفحة الرئيسية، الوصف، نص البانر العلوي، والروابط فورياً</p></div><span class="chip bg-green-500/20 text-green-300 border border-green-500/30">حفظ تلقائي</span></div>
+<div class="grid lg:grid-cols-2 gap-5 mt-5">
+<div class="bg-black/40 border border-line rounded-2xl p-5 space-y-4">
+<div><label class="lbl">العنوان الرئيسي للهيرو (Hero Title)</label><input id="cmsHeroTitle" class="input text-sm" value="عِش حياة ثانية بقوانينك أنت"></div>
+<div><label class="lbl">الوصف التعريفي تحت العنوان</label><textarea id="cmsHeroDesc" rows="3" class="input text-sm">أضخم سيرفر حياة واقعية عربي بنظام اقتصادي متكامل، وظائف تفاعلية، عصابات وقوات أمنية متطورة. يمكنك الآن تعديل وإدارة كافة أقسام الموقع واللاعبين والأسعار بضغطة زر من لوحة التحكم!</textarea></div>
+<div><label class="lbl">شارة الموسم (Hero Badge)</label><input id="cmsHeroBadge" class="input text-sm" value="الموسم الثالث • LIVE NOW"></div>
+</div>
+<div class="bg-black/40 border border-line rounded-2xl p-5 space-y-4">
+<div><label class="lbl">نص الشريط العلوي المتحرك (Announcement Bar)</label><input id="cmsAnnounceText" class="input text-sm" value="الموسم الثالث انطلق — خصم 30% بكود ONEDAY30 + باقات حصرية متاحة الآن"><label class="flex items-center gap-2 text-xs font-bold text-white mt-2 cursor-pointer"><input type="checkbox" id="cmsAnnounceShow" checked class="accent-[#FFB800] w-4 h-4 cursor-pointer"> إظهار الشريط العلوي في الموقع</label></div>
+<div><label class="lbl">عنوان اتصال السيرفر (Server IP)</label><input id="cmsServerIP" class="input text-sm font-orbit" dir="ltr" value="play.oneday-rp.com"></div>
+<div><label class="lbl">رابط سيرفر الديسكورد (Discord Link)</label><input id="cmsDiscordLink" class="input text-sm font-orbit" dir="ltr" value="https://discord.gg/onedayrp"></div>
+</div>
+</div>
+<button onclick="saveSiteContent()" class="btn-gold w-full rounded-2xl py-3.5 mt-5 font-extrabold text-sm shadow-xl"><i class="fa-solid fa-floppy-disk"></i> تطبيق وحفظ كافة النصوص والروابط فوراً</button>
+</div>
+</div>
+
+<div id="atab-appearance" class="atab-pane hidden">
+<div class="glass rounded-3xl p-6 shine-border">
+<h4 class="font-changa font-extrabold text-xl">🎨 تعديل مظهر الموقع، الصور، والخلفيات</h4><p class="text-xs text-muted mt-1">غيّر لون الطابع (Theme Color)، خلفية الموقع، صورة الهيرو بضغطة زر</p>
+<div class="grid lg:grid-cols-2 gap-5 mt-5">
+<div class="bg-black/40 border border-line rounded-2xl p-5">
+<label class="lbl">رابط صورة خلفية الموقع الشاملة (Site Background Overlay)</label><input id="siteBg" class="input text-xs font-orbit" dir="ltr" placeholder="https://images.unsplash.com/...">
+<div class="flex gap-2 mt-3"><button onclick="applySiteBg()" class="btn-gold rounded-xl px-4 py-2 text-xs font-bold">تطبيق الخلفية</button><button onclick="clearSiteBg()" class="btn-ghost rounded-xl px-4 py-2 text-xs">إزالة الخلفية</button></div>
+<div class="flex gap-2 mt-4 flex-wrap"><button onclick="presetBg(1)" class="btn-ghost rounded-xl px-3 py-1.5 text-[11px]">🌃 مدينة ليلية</button><button onclick="presetBg(2)" class="btn-ghost rounded-xl px-3 py-1.5 text-[11px]">🏎️ سيارات رياضية</button><button onclick="presetBg(3)" class="btn-ghost rounded-xl px-3 py-1.5 text-[11px]">🌆 لوس سانتوس</button></div>
+</div>
+<div class="bg-black/40 border border-line rounded-2xl p-5">
+<label class="lbl">رابط صورة قسم الهيرو الرئيسي (Hero Image)</label><input id="heroBgInput" class="input text-xs font-orbit" dir="ltr" placeholder="https://images.unsplash.com/...">
+<button onclick="applyHeroBg()" class="btn-gold w-full rounded-xl py-2.5 mt-3 text-xs font-bold">تحديث صورة الهيرو 🖼️</button>
+</div>
+<div class="bg-black/40 border border-line rounded-2xl p-5">
+<label class="lbl">لون التميز الأساسي في الموقع (Primary Theme Color)</label>
+<div class="flex gap-2 items-center"><input id="goldColor" type="color" value="#FFB800" onchange="document.getElementById('goldColorText').value=this.value;applyGold()" class="w-12 h-10 rounded-lg border border-line bg-transparent cursor-pointer"><input id="goldColorText" class="input text-xs font-orbit flex-1" dir="ltr" value="#FFB800" oninput="document.getElementById('goldColor').value=this.value;applyGold()"><button onclick="applyGold()" class="btn-ghost rounded-xl px-4 py-2 text-xs font-bold">تطبيق</button></div>
+<div class="flex gap-2 mt-3"><button onclick="setGoldPreset('#FFB800')" class="w-8 h-8 rounded-lg border border-white/20" style="background:#FFB800" title="Gold"></button><button onclick="setGoldPreset('#00E5FF')" class="w-8 h-8 rounded-lg border border-white/20" style="background:#00E5FF" title="Cyan"></button><button onclick="setGoldPreset('#22c55e')" class="w-8 h-8 rounded-lg border border-white/20" style="background:#22c55e" title="Emerald"></button><button onclick="setGoldPreset('#FF2E4D')" class="w-8 h-8 rounded-lg border border-white/20" style="background:#FF2E4D" title="Crimson"></button><button onclick="setGoldPreset('#7C3AED')" class="w-8 h-8 rounded-lg border border-white/20" style="background:#7C3AED" title="Violet"></button></div>
+</div>
+<div class="bg-black/40 border border-line rounded-2xl p-5">
+<label class="lbl">أيام العرض المتبقية في العداد</label>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<div><label class="lbl">الأيام</label><input id="cfgDays" type="number" class="input text-xs font-orbit text-center" value="2"></div>
+<div><label class="lbl">الساعات</label><input id="cfgHours" type="number" class="input text-xs font-orbit text-center" value="14"></div>
+<div class="flex items-end"><button onclick="saveCountdownConfig()" class="btn-gold w-full rounded-xl py-2.5 text-xs font-bold">تحديث</button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="atab-kyc" class="atab-pane hidden">
+<div class="glass rounded-3xl p-6 shine-border">
+<div class="flex justify-between items-center pb-4 border-b border-line"><div><h4 class="font-changa font-extrabold text-xl">🆔 طلبات التوثيق وتقديم Whitelist</h4><p class="text-xs text-muted">راجع طلبات التقديم، ثم اقبل أو ارفض بضغطة زر مع منح شارة موثق ✅</p></div><span class="chip bg-gold text-black font-bold" id="kycPendingCountBadge">0 طلب معلق</span></div>
+<div id="kycList" class="space-y-3 mt-5"></div>
+</div>
+</div>
+
+<div id="atab-tickets" class="atab-pane hidden">
+<div class="glass rounded-3xl p-5 shine-border"><h4 class="font-changa font-extrabold text-xl mb-1">🎫 تذاكر الدعم الفني الواردة</h4><p class="text-xs text-muted mb-4">قم بالرد على استفسارات ومشاكل اللاعبين وإغلاق التذاكر المكتملة</p><div id="adminTicketsList" class="space-y-3"></div></div>
+</div>
+
+<div id="atab-news" class="atab-pane hidden">
+<div class="glass rounded-3xl p-5 shine-border">
+<h4 class="font-changa font-extrabold text-xl mb-1">📰 نشر الأخبار والفعاليات</h4><p class="text-xs text-muted mb-4">انشر أخبار وتحديثات جديدة تظهر مباشرة في قسم الأخبار</p>
+<div class="grid sm:grid-cols-2 gap-3 bg-black/40 border border-line rounded-2xl p-5 mb-5">
+<div class="sm:col-span-2"><label class="lbl">عنوان الخبر</label><input id="nnTitle" class="input text-xs" placeholder="مثال: بطولة الرول بلاي الأسبوعية برعاية..."></div>
+<div><label class="lbl">القسم</label><select id="nnCat" class="input text-xs font-bold"><option value="update">تحديث جديد 🚀</option><option value="event">فعالية كبرى 🏆</option><option value="patch">باتش أداء 🛠️</option></select></div>
+<div><label class="lbl">رابط صورة الخبر</label><input id="nnImg" class="input text-xs font-orbit" placeholder="https://images.unsplash.com/..." dir="ltr"></div>
+<div class="sm:col-span-2"><label class="lbl">تفاصيل مختصرة للخبر</label><textarea id="nnEx" rows="2" class="input text-xs" placeholder="اكتب ملخص الخبر هنا..."></textarea></div>
+<button onclick="addNews()" class="btn-gold rounded-xl py-3 text-xs font-extrabold sm:col-span-2"><i class="fa-solid fa-paper-plane"></i> نشر الخبر الآن على الموقع</button>
+</div>
+<div id="adminNewsList" class="space-y-2"></div>
+</div>
+</div>
+
+<div id="atab-live" class="atab-pane hidden">
+<div class="glass rounded-3xl p-5 shine-border">
+<h4 class="font-changa font-extrabold text-xl mb-1">📡 مركز البث المباشر والإشعارات الفورية</h4><p class="text-xs text-muted mb-4">أرسل تنبيهات عاجلة تنبثق فوراً لجميع زوار الموقع واللاعبين</p>
+<div class="flex flex-col sm:flex-row gap-2 bg-black/40 p-4 rounded-2xl border border-line">
+<select id="broadcastTarget" class="input text-xs font-bold sm:!w-[180px]"><option value="all">📢 إشعار لكافة الزوار</option><option value="vip">👑 فئة VIP فقط</option><option value="online">🟢 المتصلون حالياً</option></select>
+<input id="broadcastMsg" class="input text-xs flex-1" placeholder="اكتب نص الإشعار هنا...">
+<button onclick="sendBroadcast()" class="btn-gold rounded-xl px-6 py-2.5 text-xs font-extrabold whitespace-nowrap">إرسال الإشعار 📢</button>
+</div>
+<div class="mt-5"><h5 class="font-bold text-sm text-white mb-2">سجل الإشعارات المرسلة:</h5><div id="broadcastHist" class="space-y-2"></div></div>
+</div>
+</div>
+
+<div id="atab-settings" class="atab-pane hidden">
+<div class="glass rounded-3xl p-6 shine-border">
+<h4 class="font-changa font-extrabold text-xl">⚙️ إعدادات السيرفر والبيانات العامة</h4>
+<div class="grid sm:grid-cols-2 gap-4 mt-5">
+<div><label class="lbl">عنوان اتصال السيرفر (IP)</label><input id="sIP" class="input font-orbit text-xs font-bold" dir="ltr"></div>
+<div><label class="lbl">رابط سيرفر الديسكورد</label><input id="sDiscord" class="input font-orbit text-xs" dir="ltr"></div>
+<div><label class="lbl">إجمالي مقاعد Whitelist</label><input id="sSeatsTotal" type="number" class="input font-orbit text-xs"></div>
+<div><label class="lbl">المقاعد المحجوزة حالياً</label><input id="sSeatsTaken" type="number" class="input font-orbit text-xs"></div>
+</div>
+<button onclick="saveSettings()" class="btn-gold w-full rounded-2xl py-3.5 mt-5 font-extrabold text-sm">💾 حفظ كافة الإعدادات</button>
+<div class="glass rounded-2xl p-5 mt-6 border !border-red-500/30 bg-red-500/5">
+<div class="font-bold text-sm text-red-300 mb-1">⚠️ منطقة الإجراءات الحساسة</div>
+<div class="text-xs text-muted">يمكنك إعادة تعيين كافة البيانات إلى حالتها الأولى للتجربة</div>
+<div class="flex gap-2 mt-3"><button onclick="resetDemo()" class="rounded-xl px-4 py-2 text-xs font-bold border border-red-500/40 text-red-300 hover:bg-red-500/10">تصفير وإعادة تهيئة كاملة</button><button onclick="exportCSV()" class="btn-ghost rounded-xl px-4 py-2 text-xs">تصدير كل البيانات</button></div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- CART DRAWER -->
+<div id="cartDrawer" class="fixed inset-0 z-[90] hidden">
+<div class="absolute inset-0 modal-bg" onclick="toggleCart(false)"></div>
+<div id="cartPanel" class="absolute top-0 bottom-0 left-0 w-[420px] max-w-[92vw] glass border-r border-line p-0 flex flex-col translate-x-full cart-anim">
+<div class="p-5 border-b border-line flex items-center justify-between">
+<h3 class="font-changa font-extrabold text-xl flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-gold"></i> سلة التسوق</h3>
+<button onclick="toggleCart(false)" class="w-9 h-9 rounded-xl bg-white/5 border border-line flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+<div class="p-4 border-t border-line bg-black/30">
+<div class="flex gap-2 mb-3">
+<input id="couponInput" class="input !py-2 text-xs font-orbit flex-1" placeholder="كود الخصم (ONEDAY30)" dir="ltr">
+<button onclick="applyCoupon()" class="btn-ghost rounded-xl px-4 py-2 text-xs font-bold">تطبيق</button>
+</div>
+<div id="couponMsg" class="text-xs font-bold mb-2 hidden"></div>
+<div class="space-y-1.5 text-sm font-bold">
+<div class="flex justify-between"><span class="text-muted">المجموع</span><span id="cartTotal" class="font-orbit">0 ر.س</span></div>
+<div class="flex justify-between text-green-400"><span>الخصم</span><span id="cartDiscount" class="font-orbit">0 ر.س</span></div>
+<div class="flex justify-between text-lg"><span>الإجمالي</span><span id="cartFinal" class="font-orbit text-gold">0 ر.س</span></div>
+</div>
+<button onclick="checkout()" class="btn-gold w-full rounded-xl py-3.5 mt-4 font-extrabold text-sm">إتمام الشراء والدفع الآمن <i class="fa-solid fa-lock text-xs"></i></button>
+<p class="text-[11px] text-muted text-center mt-2">الدفع عبر مدى • Apple Pay • STC Pay • فيزا • PayPal</p>
+</div>
+</div>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="fixed inset-0 z-[90] hidden">
+<div class="absolute inset-0 modal-bg" onclick="closeAuth()"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] max-w-[92vw] glass rounded-3xl p-7 shine-border">
+<button onclick="closeAuth()" class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-white/5 border border-line flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+<h3 id="authTitle" class="font-changa font-extrabold text-2xl">تسجيل الدخول</h3>
+<p id="authSub" class="text-xs text-muted mt-1">مرحباً بعودتك! سجل دخولك للمتابعة</p>
+<div class="space-y-3 mt-6">
+<div id="authNameWrap" class="hidden"><label class="lbl">الاسم الكامل</label><input id="authName" class="input text-sm" placeholder="مثال: فهد العتيبي"></div>
+<div><label class="lbl">البريد الإلكتروني</label><input id="authEmail" class="input text-sm" placeholder="you@oneday.gg" dir="ltr"></div>
+<div><label class="lbl">كلمة المرور</label><input id="authPass" type="password" class="input text-sm" placeholder="••••••••" dir="ltr"></div>
+<button id="authSubmitBtn" onclick="handleAuth()" class="btn-gold w-full rounded-xl py-3 font-extrabold text-sm mt-2">دخول</button>
+<p class="text-xs text-center text-muted">للإدارة استخدم <b class="text-gold font-orbit">admin@oneday-rp.com / admin123</b></p>
+</div>
+<div class="text-center mt-4 text-xs">
+<span id="authSwitchText" class="text-muted">ليس لديك حساب؟</span>
+<button onclick="toggleAuthMode()" id="authSwitchBtn" class="text-gold font-bold underline mr-1">إنشاء حساب جديد</button>
+</div>
+</div>
+</div>
+
+<!-- VIDEO MODAL -->
+<div id="videoModal" class="fixed inset-0 z-[90] hidden">
+<div class="absolute inset-0 modal-bg" onclick="closeVideo()"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] max-w-[92vw] glass rounded-3xl overflow-hidden shine-border">
+<div class="p-4 flex justify-between items-center border-b border-line"><h3 class="font-changa font-bold">العرض الرسمي - One Day RP Season 3</h3><button onclick="closeVideo()" class="w-8 h-8 rounded-lg bg-white/5 border border-line flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+<div class="aspect-video bg-black flex items-center justify-center relative overflow-hidden">
+<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60">
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+<div class="w-16 h-16 rounded-full bg-gold text-black flex items-center justify-center text-2xl animate-pulse"><i class="fa-solid fa-play"></i></div>
+<p class="text-white font-bold mt-3">فيديو تشويقي - سيتم ربطه بقناة اليوتيوب الرسمية</p>
+<p class="text-muted text-xs mt-1">اضغط تشغيل لمشاهدة أجواء المدينة والفعاليات</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- HELP MODAL -->
+<div id="helpModal" class="fixed inset-0 z-[90] hidden">
+<div class="absolute inset-0 modal-bg" onclick="closeHelp()"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] max-w-[92vw] glass rounded-3xl p-6 max-h-[85vh] overflow-y-auto shine-border">
+<div class="flex justify-between items-start"><h3 class="font-changa font-extrabold text-xl">📖 دليل لوحة التحكم الشاملة</h3><button onclick="closeHelp()" class="w-8 h-8 rounded-lg bg-white/5 border border-line flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+<div class="space-y-4 mt-4 text-sm leading-7">
+<div class="bg-black/40 border border-line rounded-2xl p-4"><b class="text-gold">1. إدارة اللاعبين:</b> ابحث عن اللاعب → اضغط حظر مع كتابة السبب أو فك حظر أو منح مكافأة مالية فورية أو ترقية الرتبة.</div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><b class="text-gold">2. المتجر والأسعار:</b> عدّل السعر يدوياً داخل الجدول أو استخدم أزرار الزيادة/التخفيض الجماعي (+10% / -20%) لتطبيق خصم شامل فوراً.</div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><b class="text-gold">3. تعديل نصوص الموقع:</b> تبويب "تعديل نصوص الموقع" يسمح لك بتغيير عنوان الهيرو والوصف ونص البانر العلوي ورابط الديسكورد و IP السيرفر بدون كود.</div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><b class="text-gold">4. المظهر:</b> غيّر لون الثيم، خلفية الموقع، وصورة الهيرو بالأزرار الجاهزة أو عبر إدخال رابط صورة مخصص.</div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><b class="text-gold">5. الطلبات والفواتير:</b> راجع طلبات الشراء → وافق لإضافة الرصيد للاعب أو ارفض مع استرداد.</div>
+<div class="bg-black/40 border border-line rounded-2xl p-4"><b class="text-gold">6. البث المباشر:</b> اكتب رسالة وحدد الفئة المستهدفة لإرسال إشعار فوري يظهر كـ Toast لكل الزوار.</div>
+</div>
+<button onclick="closeHelp()" class="btn-gold w-full rounded-xl py-3 mt-6 font-bold">فهمت، شكراً!</button>
+</div>
+</div>
+
+<div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 items-center pointer-events-none"></div>
+
+<footer class="border-t border-line mt-10 py-8 text-center">
+<div class="max-w-[1280px] mx-auto px-4">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl flex items-center justify-center font-orbit font-black text-black" style="background:linear-gradient(135deg,var(--gold2),#FF6B00)">OD</div><div class="text-right"><div class="font-orbit font-black text-white" dir="ltr">ONE DAY RP</div><div class="text-[11px] text-muted">© 2025 One Day RP - جميع الحقوق محفوظة • Season 3</div></div></div>
+<div class="flex gap-2 text-xs font-bold">
+<button onclick="openDiscord()" class="btn-ghost rounded-xl px-4 py-2"><i class="fa-brands fa-discord"></i> الديسكورد</button>
+<button onclick="copyIP()" class="btn-ghost rounded-xl px-4 py-2"><i class="fa-solid fa-server"></i> <span dir="ltr">play.oneday-rp.com</span></button>
+<button onclick="navigateTo('rules')" class="btn-ghost rounded-xl px-4 py-2">القوانين</button>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const LS={get:(k,d)=>{try{let v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))}
+let toastTimer=null;
+function toast(msg,type='gold'){
+  const c=$('toastContainer');
+  const el=document.createElement('div');
+  el.className='toast-item';
+  if(type==='error') el.style.borderColor='rgba(255,46,77,.6)';
+  if(type==='success') el.style.borderColor='rgba(34,197,94,.6)';
+  if(type==='info') el.style.borderColor='rgba(0,229,255,.6)';
+  el.textContent=msg;
+  c.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(8px)';setTimeout(()=>el.remove(),300)},2600);
+}
+function navigateTo(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=$('page-'+page);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(page==='admin') checkAdminAuth();
+  if(page==='store') renderStore();
+  if(page==='dashboard') renderDashboard();
+  if(page==='support') renderTickets();
+  if(page==='news') renderNews();
+  if(page==='rules') renderRules();
+}
+function toggleMobile(show){
+  const m=$('mobileMenu');
+  m.classList.toggle('hidden',!show);
+  document.body.style.overflow=show?'hidden':'';
+}
+function toggleCart(show){
+  const d=$('cartDrawer'), p=$('cartPanel');
+  if(show){d.classList.remove('hidden'); setTimeout(()=>p.style.transform='translateX(0)',10); updateCartUI();}
+  else{p.style.transform='translateX(100%)'; setTimeout(()=>d.classList.add('hidden'),300);}
+}
+function copyIP(){
+  const ip=LS.get('od_siteContent',null)?.serverIP || LS.get('od_settings',{}).ip || 'play.oneday-rp.com';
+  navigator.clipboard.writeText(ip).then(()=>toast('تم نسخ عنوان السيرفر: '+ip,'success')).catch(()=>toast('تم نسخ IP: '+ip));
+}
+function openDiscord(){const link=LS.get('od_siteContent',null)?.discord || LS.get('od_settings',{}).discord || 'https://discord.gg/onedayrp'; window.open(link,'_blank'); toast('جاري فتح الديسكورد...','info');}
+function openVideo(){ $('videoModal').classList.remove('hidden');}
+function closeVideo(){ $('videoModal').classList.add('hidden');}
+function openAdminHelp(){ $('helpModal').classList.remove('hidden');}
+function closeHelp(){ $('helpModal').classList.add('hidden');}
+
+let authMode='login';
+function openAuth(mode){
+  authMode=mode;
+  $('authModal').classList.remove('hidden');
+  updateAuthModal();
+}
+function closeAuth(){ $('authModal').classList.add('hidden');}
+function toggleAuthMode(){ authMode= authMode==='login'?'register':'login'; updateAuthModal();}
+function updateAuthModal(){
+  $('authTitle').textContent= authMode==='login'?'تسجيل الدخول':'إنشاء حساب جديد';
+  $('authSub').textContent= authMode==='login'?'مرحباً بعودتك! سجل دخولك للمتابعة':'انضم لعائلة ون داي واحصل على مكافأة البداية';
+  $('authNameWrap').classList.toggle('hidden', authMode==='login');
+  $('authSubmitBtn').textContent= authMode==='login'?'دخول':'إنشاء الحساب';
+  $('authSwitchText').textContent= authMode==='login'?'ليس لديك حساب؟':'لديك حساب بالفعل؟';
+  $('authSwitchBtn').textContent= authMode==='login'?'إنشاء حساب جديد':'تسجيل الدخول';
+}
+function handleAuth(){
+  const name=$('authName').value.trim(), email=$('authEmail').value.trim().toLowerCase(), pass=$('authPass').value.trim();
+  if(!email||!pass) return toast('يرجى تعبئة البريد وكلمة المرور','error');
+  if(authMode==='register' && !name) return toast('يرجى إدخال الاسم','error');
+  let users=LS.get('od_users',null);
+  if(!users) users=defaultUsers;
+  if(authMode==='register'){
+    if(users.find(u=>u.email===email)) return toast('البريد مسجل مسبقاً','error');
+    const nu={id:Date.now(),name,email,pass,role:'عضو',wallet:0,money:20000,verified:false,avatar:name[0].toUpperCase(),status:'active',banReason:''};
+    users.push(nu); LS.set('od_users',users); LS.set('od_currentUser',nu);
+    toast('تم إنشاء الحساب بنجاح! مرحباً بك 🎉','success'); closeAuth(); updateAuthUI(); renderDashboard();
+  } else {
+    let u=users.find(x=>x.email===email && x.pass===pass);
+    if(!u && email==='admin@oneday-rp.com' && pass==='admin123') u=users.find(x=>x.email==='admin@oneday-rp.com');
+    if(!u) return toast('بيانات الدخول غير صحيحة','error');
+    if(u.status==='banned') return toast('هذا الحساب محظور: '+(u.banReason||''),'error');
+    LS.set('od_currentUser',u); toast('تم تسجيل الدخول أهلاً '+u.name,'success'); closeAuth(); updateAuthUI(); renderDashboard(); checkAdminAuth();
+  }
+}
+function logout(){ localStorage.removeItem('od_currentUser'); updateAuthUI(); renderDashboard(); checkAdminAuth(); toast('تم تسجيل الخروج','info'); navigateTo('home');}
+function updateAuthUI(){
+  const cur=LS.get('od_currentUser',null);
+  const area=$('authNavArea');
+  if(cur){
+    area.innerHTML=`<span class="hidden lg:flex items-center gap-2 bg-white/5 border border-line rounded-xl px-3 py-1.5 text-xs font-bold"><span class="w-7 h-7 rounded-lg bg-gold text-black flex items-center justify-center font-orbit">${cur.avatar||cur.name[0]}</span> ${cur.name} <span class="chip bg-gold text-black !py-0.5">${cur.role}</span></span><button onclick="logout()" class="btn-ghost rounded-xl px-3 py-2 text-xs">خروج</button>`;
+  } else {
+    area.innerHTML=`<button onclick="openAuth('login')" id="authBtnDesk" class="btn-ghost rounded-xl px-4 py-2 text-[13px] font-extrabold cursor-pointer">دخول</button>`;
+  }
+  const dashAdminBtn=$('dashAdminBtn');
+  if(dashAdminBtn) dashAdminBtn.classList.toggle('hidden', !(cur && (cur.email==='admin@oneday-rp.com' || cur.role==='إدارة' || cur.role==='مؤسس')));
+}
+
+// DEFAULT DATA
+const defaultProducts=[
+  {id:1,name:'VIP ذهبي - شهر',price:49,oldPrice:79,tab:'vip',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop',badge:'الأكثر مبيعاً',pop:1,desc:'أولوية دخول + سيارة حصرية + 50K',enabled:true},
+  {id:2,name:'VIP بلاتيني - شهر',price:89,oldPrice:129,tab:'vip',img:'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=600&auto=format&fit=crop',badge:'مميز',pop:2,desc:'كراج خاص + قصر مؤقت + 120K',enabled:true},
+  {id:3,name:'VIP ماسي - دائم',price:299,oldPrice:449,tab:'vip',img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=600&auto=format&fit=crop',badge:'دائم',pop:3,desc:'رتبة دائمة + لوحة مميزة + 500K',enabled:true},
+  {id:4,name:'500,000$ كاش داخل اللعبة',price:35,oldPrice:50,tab:'coins',img:'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=600&auto=format&fit=crop',badge:'عرض',pop:4,desc:'رصيد فوري + بونص 50K',enabled:true},
+  {id:5,name:'1,000,000$ + سيارة هدية',price:65,oldPrice:95,tab:'coins',img:'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=600&auto=format&fit=crop',badge:'بونص',pop:5,desc:'مليون كاش + مركبة عشوائية',enabled:true},
+  {id:6,name:'Bugatti Chiron - حصرية',price:149,oldPrice:199,tab:'cars',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop',badge:'حصرية',pop:6,desc:'سرعة قصوى 420 + تظليل مجاني',enabled:true},
+  {id:7,name:'Lamborghini Aventador SVJ',price:129,oldPrice:179,tab:'cars',img:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=600&auto=format&fit=crop',badge:'جديد',pop:7,desc:'صوت محرك معدل + لون حصري',enabled:true},
+  {id:8,name:'قصر فاخر - Vinewood Hills',price:249,oldPrice:349,tab:'estate',img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600&auto=format&fit=crop',badge:'VIP',pop:8,desc:'6 غرف + كراج 10 سيارات + مسبح',enabled:true},
+  {id:9,name:'تغيير الهوية + سجل نظيف',price:25,oldPrice:35,tab:'service',img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop',badge:'خدمة',pop:9,desc:'هوية جديدة + مسح السوابق',enabled:true}
+];
+const defaultUsers=[
+  {id:101,name:'المدير العام',email:'admin@oneday-rp.com',pass:'admin123',role:'مؤسس',wallet:5000,money:500000,verified:true,avatar:'A',status:'active',banReason:''},
+  {id:102,name:'فهد العتيبي',email:'fahad@oneday.gg',pass:'123123',role:'VIP ذهبي',wallet:1200,money:84500,verified:true,avatar:'F',status:'active',banReason:''},
+  {id:103,name:'سلطان الحربي',email:'sultan@gmail.com',pass:'123123',role:'عضو',wallet:300,money:12000,verified:false,avatar:'S',status:'active',banReason:''},
+  {id:104,name:'نواف القحطاني',email:'nawaf@gmail.com',pass:'123123',role:'عضو',wallet:100,money:8000,verified:false,avatar:'N',status:'banned',banReason:'استخدام ثغرات'},
+  {id:105,name:'عبدالله الدوسري',email:'abdullah@gmail.com',pass:'123123',role:'VIP بلاتيني',wallet:2200,money:150000,verified:true,avatar:'ع',status:'active',banReason:''}
+];
+const defaultNews=[
+  {id:1,title:'انطلاق الموسم الثالث بخرائط ومهام جديدة كلياً',cat:'update',img:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop',ex:'تحديث ضخم يشمل وظائف جديدة، نظام عصابات مطور، وسيارات حصرية مع تحسينات أداء 40%.',date:'2025-10-01',views:12400},
+  {id:2,title:'بطولة الرول بلاي الأسبوعية - الجائزة 50,000$ داخل اللعبة',cat:'event',img:'https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop',ex:'شارك مع فريقك في فعالية نهاية الأسبوع واربح جوائز نقدية وسيارات نادرة.',date:'2025-09-28',views:8900},
+  {id:3,title:'باتش 2.5: إصلاحات اقتصادية ومكافحة الغش',cat:'patch',img:'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop',ex:'تحسين استقرار السيرفر، إصلاح ثغرات المتجر، وتحديث نظام الشرطة.',date:'2025-09-20',views:5600},
+  {id:4,title:'افتتاح قصور Vinewood الجديدة - احجز قصرك الآن',cat:'estate',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',ex:'عقارات فاخرة بإطلالات خلابة وكراجات تتسع لـ 10 مركبات.',date:'2025-09-18',views:4300}
+];
+const defaultRules=[
+  {id:1,cat:'general',title:'احترام جميع اللاعبين والإدارة',desc:'يمنع السب، العنصرية، أو الاستفزاز. أي تجاوز يعرضك للإنذار أو الحظر المؤقت.',punish:'إنذار → كتم 60د → حظر 24س'},
+  {id:2,cat:'general',title:'يمنع استغلال الثغرات (Exploits)',desc:'اكتشاف أي ثغرة يجب التبليغ عنها فوراً. استغلالها = حظر نهائي.',punish:'حظر 7 أيام → نهائي'},
+  {id:3,cat:'rp',title:'RDM - القتل العشوائي ممنوع',desc:'يمنع قتل أي لاعب دون سبب رول بلاي قوي ومبرر قصصي واضح.',punish:'سجن 30د + غرامة'},
+  {id:4,cat:'rp',title:'NLR - قانون الذاكرة الجديدة',desc:'عند موتك تفقد ذاكرة آخر 15 دقيقة ولا يمكنك العودة لمكان موتك.',punish:'إنذار → سجن'},
+  {id:5,cat:'rp',title:'Power Gaming & Meta Gaming',desc:'يمنع إجبار اللاعب على فعل مستحيل أو استخدام معلومات خارج الرول بلاي.',punish:'إنذار → حظر 3 أيام'},
+  {id:6,cat:'crime',title:'قوانين السرقات والسطو',desc:'السرقة تحتاج 3 عصابات + 4 شرطة على الأقل، بحد أقصى 2 سرقة يومياً.',punish:'سجن + مصادرة'},
+  {id:7,cat:'crime',title:'الخطف والاحتجاز',desc:'مدة الخطف 45 دقيقة كحد أقصى ويمنع خطف العاملين في القطاعات الصحية.',punish:'سجن 45د'},
+  {id:8,cat:'police',title:'قوانين الشرطة والطوارئ',desc:'يمنع على الشرطة إطلاق النار إلا بعد 3 تحذيرات واضحة.',punish:'فصل + إنذار وظيفي'},
+  {id:9,cat:'police',title:'التفاعل مع الإسعاف',desc:'يمنع قتل المسعفين أثناء تأدية واجبهم ويحظر سرقة مركبات الطوارئ.',punish:'حظر 48س'},
+  {id:10,cat:'punish',title:'لائحة العقوبات العامة',desc:'تتدرج العقوبات: إنذار → سجن → غرامة → كتم → حظر مؤقت → حظر نهائي مع إمكانية الاستئناف.',punish:'حسب المخالفة'}
+];
+const defaultTickets=[
+  {id:1001,name:'فهد_العتيبي (10482)',title:'لم أستلم سيارة المتجر',msg:'اشتريت Bugatti ولم تظهر في الكراج',status:'open',date:'2025-10-02',reply:''},
+  {id:1002,name:'سلطان',title:'استفسار عن Whitelist',msg:'متى يتم قبول طلبي؟',status:'open',date:'2025-10-01',reply:''}
+];
+const defaultKYC=[
+  {id:2001,name:'تركي الشهراني',discord:'turki_rp#4421',email:'turki@gmail.com',age:'22 - 27 سنة',why:'خبرة سنتين في الرول بلاي وأرغب في تجربة سيرفر احترافي منظم.',status:'pending',date:'2025-10-03'},
+  {id:2002,name:'فيصل المطيري',discord:'faisal_yt',email:'faisal@gmail.com',age:'18 - 21 سنة',why:'أحب الرول بلاي الواقعي وأتابع ون داي منذ الموسم الأول.',status:'pending',date:'2025-10-03'}
+];
+
+function ensureDefaults(){
+  if(!LS.get('od_products',null)) LS.set('od_products',defaultProducts);
+  if(!LS.get('od_users',null)) LS.set('od_users',defaultUsers);
+  if(!LS.get('od_news',null)) LS.set('od_news',defaultNews);
+  if(!LS.get('od_tickets',null)) LS.set('od_tickets',defaultTickets);
+  if(!LS.get('od_kyc',null)) LS.set('od_kyc',defaultKYC);
+  if(!LS.get('od_orders',null)) LS.set('od_orders',[]);
+  if(!LS.get('od_cart',null)) LS.set('od_cart',[]);
+  if(!LS.get('od_settings',null)) LS.set('od_settings',{ip:'play.oneday-rp.com',discord:'https://discord.gg/onedayrp',seatsTotal:80,seatsTaken:57,online:524,max:640,maintenance:false});
+  if(!LS.get('od_offers',null)) LS.set('od_offers',{code:'ONEDAY30',pct:30,flash:[]});
+  if(!LS.get('od_siteContent',null)) LS.set('od_siteContent',{heroTitle:'عِش حياة ثانية <span class="gold-text">بقوانينك أنت</span>',heroDesc:'أضخم سيرفر حياة واقعية عربي بنظام اقتصادي متكامل، وظائف تفاعلية، عصابات وقوات أمنية متطورة. يمكنك الآن تعديل وإدارة كافة أقسام الموقع واللاعبين والأسعار بضغطة زر من لوحة التحكم!',heroBadge:'الموسم الثالث • LIVE NOW',announceText:'الموسم الثالث انطلق — خصم 30% بكود ONEDAY30 + باقات حصرية متاحة الآن',announceShow:true,serverIP:'play.oneday-rp.com',discord:'https://discord.gg/onedayrp',siteBg:'',heroBg:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=2074&auto=format&fit=crop',heroCard:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2013&auto=format&fit=crop',gold:'#FFB800'});
+  if(!LS.get('od_broadcast',null)) LS.set('od_broadcast',[]);
+  if(!LS.get('od_banlog',null)) LS.set('od_banlog',[{id:1,name:'نواف القحطاني',reason:'استخدام ثغرات',by:'الإدارة',date:'2025-10-02'}]);
+  if(!LS.get('od_countdown',null)) LS.set('od_countdown',{days:2,hours:14});
+}
+ensureDefaults();
+
+// APPLY SITE CONTENT ON LOAD
+function applySiteContentToDOM(){
+  const sc=LS.get('od_siteContent',null);
+  if(!sc) return;
+  if($('heroTitle')) $('heroTitle').innerHTML=sc.heroTitle;
+  if($('heroDesc')) $('heroDesc').textContent=sc.heroDesc;
+  if($('heroSeasonBadge')) $('heroSeasonBadge').textContent=sc.heroBadge;
+  if($('announceText')) $('announceText').textContent=sc.announceText;
+  if($('announceBar')) $('announceBar').style.display=sc.announceShow===false?'none':'';
+  if($('ipLabel1')) $('ipLabel1').textContent=sc.serverIP;
+  if($('ipLabel3')) $('ipLabel3').textContent=sc.serverIP;
+  if($('headerSubText')) $('headerSubText').textContent='سيرفر الحياة الواقعية العربي';
+  if(sc.siteBg) {$('siteBgOverlay').style.backgroundImage=`url('${sc.siteBg}')`; $('siteBgOverlay').style.opacity='0.22';} else {$('siteBgOverlay').style.backgroundImage='none';}
+  if(sc.heroBg && $('heroBgImg')) $('heroBgImg').src=sc.heroBg;
+  if(sc.heroCard && $('heroCardImg')) $('heroCardImg').src=sc.heroCard;
+  document.documentElement.style.setProperty('--gold',sc.gold||'#FFB800');
+  let rgb=hexToRgb(sc.gold||'#FFB800'); if(rgb) document.documentElement.style.setProperty('--gold-rgb',`${rgb.r},${rgb.g},${rgb.b}`);
+  if($('goldColor')) $('goldColor').value=sc.gold;
+  if($('goldColorText')) $('goldColorText').value=sc.gold;
+  if($('cmsHeroTitle')) $('cmsHeroTitle').value=sc.heroTitle.replace(/<[^>]*>/g,'').trim();
+  if($('cmsHeroDesc')) $('cmsHeroDesc').value=sc.heroDesc;
+  if($('cmsHeroBadge')) $('cmsHeroBadge').value=sc.heroBadge;
+  if($('cmsAnnounceText')) $('cmsAnnounceText').value=sc.announceText;
+  if($('cmsAnnounceShow')) $('cmsAnnounceShow').checked=sc.announceShow!==false;
+  if($('cmsServerIP')) $('cmsServerIP').value=sc.serverIP;
+  if($('cmsDiscordLink')) $('cmsDiscordLink').value=sc.discord;
+  if($('sIP')) $('sIP').value=LS.get('od_settings',{}).ip;
+  if($('sDiscord')) $('sDiscord').value=LS.get('od_settings',{}).discord;
+  if($('sSeatsTotal')) $('sSeatsTotal').value=LS.get('od_settings',{}).seatsTotal;
+  if($('sSeatsTaken')) $('sSeatsTaken').value=LS.get('od_settings',{}).seatsTaken;
+  if($('offerCode')) $('offerCode').value=LS.get('od_offers',{}).code||'ONEDAY30';
+  if($('offerPct')) $('offerPct').value=LS.get('od_offers',{}).pct||30;
+  if($('storePromoHint')) $('storePromoHint').textContent=`كود ${LS.get('od_offers',{}).code} يمنحك خصماً فورياً ${LS.get('od_offers',{}).pct}% في السلة!`;
+}
+function hexToRgb(hex){let m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);return m?{r:parseInt(m[1],16),g:parseInt(m[2],16),b:parseInt(m[3],16)}:null}
+
+// STORE LOGIC
+let currentTab='all';
+function setStoreTab(tab){
+  currentTab=tab;
+  document.querySelectorAll('[data-stab]').forEach(b=>{b.classList.toggle('active',b.dataset.stab===tab); b.classList.toggle('text-muted',b.dataset.stab!==tab);});
+  renderStore();
+}
+function renderStore(){
+  const products=LS.get('od_products',defaultProducts).filter(p=>p.enabled!==false);
+  const search=($('storeSearch')?.value||'').toLowerCase();
+  const sort=$('storeSort')?.value||'pop';
+  let list=products.filter(p=>{
+    if(currentTab!=='all' && p.tab!==currentTab) return false;
+    if(search && !p.name.toLowerCase().includes(search) && !p.desc.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  if(sort==='low') list=list.slice().sort((a,b)=>a.price-b.price);
+  if(sort==='high') list=list.slice().sort((a,b)=>b.price-a.price);
+  const grid=$('storeGrid');
+  if(!list.length){grid.innerHTML=`<div class="col-span-full text-center py-16 glass rounded-3xl"><i class="fa-solid fa-magnifying-glass text-3xl text-muted"></i><p class="text-muted font-bold mt-2">لا توجد منتجات مطابقة للبحث</p><button onclick="$('storeSearch').value='';setStoreTab('all')" class="btn-ghost rounded-xl px-4 py-2 text-xs mt-3">إعادة تعيين</button></div>`; return;}
+  grid.innerHTML=list.map(p=>`
+    <div class="shop-card glass rounded-3xl overflow-hidden shine-border flex flex-col group">
+      <div class="relative overflow-hidden">
+        <img src="${p.img}" class="shop-card-img" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop'">
+        <div class="absolute top-3 right-3 left-3 flex justify-between items-start">
+          <span class="chip ${p.badge==='حصرية'?'bg-crimson text-white':p.badge==='الأكثر مبيعاً'?'bg-gold text-black':'bg-black/70 text-white border border-white/20'}">${p.badge}</span>
+          ${p.oldPrice>p.price?`<span class="chip bg-green-500 text-white">خصم ${Math.round((1-p.price/p.oldPrice)*100)}%</span>`:''}
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+        <h3 class="font-extrabold text-[15px] text-white leading-6">${p.name}</h3>
+        <p class="text-xs text-muted mt-1 flex-1">${p.desc}</p>
+        <div class="flex items-end justify-between mt-3">
+          <div><div class="font-orbit font-black text-lg text-gold">${p.price} <span class="text-xs">ر.س</span></div>${p.oldPrice>p.price?`<div class="text-[11px] text-muted line-through font-orbit">${p.oldPrice} ر.س</div>`:''}</div>
+          <span class="text-[11px] text-muted font-bold">${p.tab==='vip'?'👑 VIP':p.tab==='cars'?'🚗 سيارة':p.tab==='coins'?'💰 كاش':p.tab==='estate'?'🏠 عقار':'🛠️ خدمة'}</span>
+        </div>
+        <button onclick="addToCart(${p.id})" class="btn-gold w-full rounded-xl py-2.5 mt-4 text-xs font-extrabold"><i class="fa-solid fa-cart-plus"></i> إضافة للسلة</button>
+      </div>
+    </div>
+  `).join('');
+  renderHomePackages();
+  updateStoreOptions();
+}
+function renderHomePackages(){
+  const prods=LS.get('od_products',defaultProducts).slice(0,3);
+  const c=$('homePackages');
+  if(!c) return;
+  c.innerHTML=prods.map(p=>`
+    <div class="glass rounded-3xl overflow-hidden shine-border flex flex-col">
+      <img src="${p.img}" class="h-[160px] w-full object-cover" alt="">
+      <div class="p-5 flex-1 flex flex-col">
+        <span class="chip bg-gold text-black w-fit">${p.badge}</span>
+        <h3 class="font-changa font-extrabold text-white mt-2">${p.name}</h3>
+        <p class="text-xs text-muted mt-1 flex-1">${p.desc}</p>
+        <div class="flex items-baseline gap-2 mt-3"><span class="font-orbit font-black text-xl text-gold">${p.price} ر.س</span>${p.oldPrice>p.price?`<span class="text-xs line-through text-muted">${p.oldPrice}</span>`:''}</div>
+        <button onclick="addToCart(${p.id});navigateTo('store')" class="btn-gold w-full rounded-xl py-2.5 mt-4 text-xs">شراء الآن</button>
+      </div>
+    </div>
+  `).join('');
+}
+function updateStoreOptions(){
+  const prods=LS.get('od_products',defaultProducts);
+  const sel=$('flashProd');
+  if(sel) sel.innerHTML=prods.map(p=>`<option value="${p.id}">${p.name} - ${p.price} ر.س</option>`).join('');
+}
+
+// CART
+let couponApplied=null;
+function addToCart(id){
+  let cart=LS.get('od_cart',[]);
+  let it=cart.find(c=>c.id===id);
+  if(it) it.qty++; else cart.push({id,qty:1});
+  LS.set('od_cart',cart);
+  updateCartUI();
+  toast('تمت الإضافة للسلة ✅','success');
+}
+function removeFromCart(id){
+  let cart=LS.get('od_cart',[]);
+  cart=cart.filter(c=>c.id!==id);
+  LS.set('od_cart',cart); updateCartUI();
+}
+function changeQty(id,delta){
+  let cart=LS.get('od_cart',[]);
+  let it=cart.find(c=>c.id===id);
+  if(!it) return;
+  it.qty+=delta;
+  if(it.qty<=0) cart=cart.filter(c=>c.id!==id);
+  LS.set('od_cart',cart); updateCartUI();
+}
+function updateCartUI(){
+  const cart=LS.get('od_cart',[]);
+  const products=LS.get('od_products',defaultProducts);
+  const total=cart.reduce((s,c)=>{let p=products.find(x=>x.id===c.id); return s+ (p?p.price*c.qty:0)},0);
+  const offers=LS.get('od_offers',{} );
+  let discount=0;
+  if(couponApplied && couponApplied.code===offers.code) discount=Math.round(total*offers.pct/100);
+  const final=Math.max(0,total-discount);
+  $('cartCount').textContent=cart.reduce((s,c)=>s+c.qty,0);
+  if($('cartCountM')) $('cartCountM').textContent=$('cartCount').textContent;
+  if($('cartCount2')) $('cartCount2').textContent=$('cartCount').textContent;
+  if($('cartTotal')) $('cartTotal').textContent=total+' ر.س';
+  if($('cartDiscount')) $('cartDiscount').textContent='-'+discount+' ر.س';
+  if($('cartFinal')) $('cartFinal').textContent=final+' ر.س';
+  const itemsEl=$('cartItems');
+  if(!itemsEl) return;
+  if(!cart.length){ itemsEl.innerHTML=`<div class="text-center py-12"><i class="fa-solid fa-cart-shopping text-4xl text-muted"></i><p class="text-muted font-bold mt-2 text-sm">السلة فارغة حالياً</p><p class="text-xs text-muted">تصفح المتجر وأضف باقاتك المفضلة</p><button onclick="toggleCart(false);navigateTo('store')" class="btn-gold rounded-xl px-5 py-2 text-xs mt-4">تصفح المتجر</button></div>`; return;}
+  itemsEl.innerHTML=cart.map(c=>{
+    const p=products.find(x=>x.id===c.id);
+    if(!p) return '';
+    return `<div class="flex gap-3 bg-black/40 border border-line rounded-2xl p-3">
+      <img src="${p.img}" class="w-16 h-16 rounded-xl object-cover">
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-sm text-white truncate">${p.name}</div>
+        <div class="text-xs text-muted">${p.price} ر.س × ${c.qty} = <b class="text-gold font-orbit">${p.price*c.qty} ر.س</b></div>
+        <div class="flex items-center gap-2 mt-2">
+          <button onclick="changeQty(${p.id},-1)" class="w-7 h-7 rounded-lg bg-white/5 border border-line flex items-center justify-center text-xs">−</button>
+          <span class="font-orbit font-bold text-sm">${c.qty}</span>
+          <button onclick="changeQty(${p.id},1)" class="w-7 h-7 rounded-lg bg-gold text-black flex items-center justify-center text-xs">+</button>
+          <button onclick="removeFromCart(${p.id})" class="mr-auto text-crimson text-xs font-bold"><i class="fa-solid fa-trash"></i> حذف</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function applyCoupon(){
+  const code=$('couponInput').value.trim().toUpperCase();
+  const offers=LS.get('od_offers',{});
+  const msg=$('couponMsg');
+  if(!code) return toast('أدخل كود الخصم','error');
+  if(code===offers.code){
+    couponApplied={code, pct:offers.pct};
+    msg.textContent=`تم تطبيق الكود! خصم ${offers.pct}% ✅`;
+    msg.className='text-xs font-bold mb-2 text-green-400 block';
+    msg.classList.remove('hidden');
+    toast(`تم تفعيل خصم ${offers.pct}% 🎉`,'success');
+  } else {
+    couponApplied=null;
+    msg.textContent='كود غير صحيح ❌';
+    msg.className='text-xs font-bold mb-2 text-crimson block';
+    msg.classList.remove('hidden');
+    toast('كود الخصم غير صحيح','error');
+  }
+  updateCartUI();
+}
+function checkout(){
+  let cart=LS.get('od_cart',[]);
+  if(!cart.length) return toast('السلة فارغة','error');
+  const cur=LS.get('od_currentUser',null);
+  if(!cur) {toast('يجب تسجيل الدخول أولاً','error'); openAuth('login'); return;}
+  const products=LS.get('od_products',defaultProducts);
+  const offers=LS.get('od_offers',{});
+  const total=cart.reduce((s,c)=>{let p=products.find(x=>x.id===c.id); return s+(p?p.price*c.qty:0)},0);
+  let discount=0; if(couponApplied && couponApplied.code===offers.code) discount=Math.round(total*offers.pct/100);
+  const final=total-discount;
+  const orderId='OD-'+Date.now().toString().slice(-6);
+  const names=cart.map(c=>{let p=products.find(x=>x.id===c.id); return p?`${p.name} x${c.qty}`:''}).join(' + ');
+  const orders=LS.get('od_orders',[]);
+  orders.unshift({id:orderId,user:cur.email, name:cur.name, products:names, total:final, raw:total, discount, status:'pending', date:new Date().toISOString().slice(0,10), items:cart});
+  LS.set('od_orders',orders);
+  // credit wallet/money simulation
+  let users=LS.get('od_users',[]);
+  let u=users.find(x=>x.email===cur.email);
+  if(u){ u.money=(u.money||0)+ Math.round(final*1000); u.wallet=(u.wallet||0)+ Math.round(final*10); LS.set('od_users',users); LS.set('od_currentUser',u); }
+  LS.set('od_cart',[]); couponApplied=null; if($('couponInput')) $('couponInput').value=''; if($('couponMsg')) $('couponMsg').classList.add('hidden');
+  updateCartUI(); renderOrdersList(); renderDashboard(); renderAdminOverview();
+  toast('تم إنشاء الطلب بنجاح! رقم الفاتورة: '+orderId,'success');
+  toggleCart(false);
+}
+function doTopup(){
+  const id=$('topupId').value.trim();
+  const pack=$('topupPack').value;
+  if(!id) return toast('أدخل ID اللاعب','error');
+  const cur=LS.get('od_currentUser',null);
+  if(!cur) return toast('سجل دخولك أولاً','error');
+  const [price,cash]=pack.split('|').map(Number);
+  const orderId='TP-'+Date.now().toString().slice(-6);
+  const orders=LS.get('od_orders',[]);
+  orders.unshift({id:orderId,user:cur.email,name:cur.name,products:`شحن سريع ID:${id} - ${cash}$`, total:price, raw:price, discount:0,status:'done',date:new Date().toISOString().slice(0,10), items:[]});
+  LS.set('od_orders',orders);
+  let users=LS.get('od_users',[]);
+  let u=users.find(x=>x.email===cur.email);
+  if(u){u.money+=cash; LS.set('od_users',users); LS.set('od_currentUser',u);}
+  toast(`تم شحن ${cash}$ إلى ID ${id} بنجاح! 🎉`,'success');
+  renderOrdersList(); renderDashboard(); renderAdminOverview();
+}
+function renderOrdersList(){
+  const cur=LS.get('od_currentUser',null);
+  const orders=LS.get('od_orders',[]).filter(o=> !cur || o.user===cur.email);
+  const el=$('ordersList');
+  const el2=$('dashOrdersList');
+  const countEl=$('myOrdersCount');
+  if(countEl) countEl.textContent=orders.length+' طلب';
+  const html = orders.length? orders.slice(0,6).map(o=>`
+    <div class="flex justify-between items-center bg-black/40 border border-line rounded-xl p-3">
+      <div><div class="font-orbit font-bold text-xs text-gold">${o.id}</div><div class="text-xs font-bold text-white truncate max-w-[180px]">${o.products}</div><div class="text-[11px] text-muted">${o.date} • ${o.status==='pending'?'قيد الانتظار':o.status==='done'?'مكتمل':o.status==='refunded'?'مسترد':o.status==='rejected'?'مرفوض':o.status}</div></div>
+      <div class="text-left"><div class="font-orbit font-black text-sm text-white">${o.total} ر.س</div><span class="chip ${o.status==='done'?'bg-green-500/20 text-green-300 border border-green-500/30':o.status==='pending'?'bg-gold/15 text-gold border border-gold/30':'bg-white/10 text-white'}">${o.status}</span></div>
+    </div>
+  `).join('') : `<div class="text-center py-8 text-muted text-xs">لا توجد طلبات بعد</div>`;
+  if(el) el.innerHTML=html;
+  if(el2) el2.innerHTML=orders.length? orders.map(o=>`
+    <div class="flex justify-between items-center bg-black/40 border border-line rounded-xl p-3">
+      <div class="flex-1"><div class="font-bold text-xs text-white">${o.products}</div><div class="text-[11px] text-muted font-orbit">${o.id} • ${o.date}</div></div>
+      <div class="font-orbit font-black text-gold">${o.total} ر.س</div>
+      <span class="chip mr-2 ${o.status==='done'?'bg-green-500 text-white':o.status==='pending'?'bg-gold text-black':'bg-white/10 text-white'}">${o.status}</span>
+    </div>
+  `).join('') : `<div class="text-center py-6 text-muted text-xs">لم تقم بأي عملية شراء بعد</div>`;
+}
+
+// WHITELIST
+function submitPreReg(){
+  const name=$('rgName').value.trim(), discord=$('rgDiscord').value.trim(), email=$('rgEmail').value.trim(), age=$('rgAge').value, why=$('rgWhy').value.trim();
+  if(!name||!discord||!email||!why) return toast('يرجى تعبئة جميع الحقول','error');
+  const kyc=LS.get('od_kyc',[]);
+  kyc.unshift({id:Date.now(),name,discord,email,age,why,status:'pending',date:new Date().toISOString().slice(0,10)});
+  LS.set('od_kyc',kyc);
+  $('rgResult').classList.remove('hidden');
+  $('rgResult').innerHTML=`✅ تم إرسال طلبك بنجاح يا <b>${name}</b>! سيتم مراجعته خلال 15 دقيقة وإشعارك عبر الديسكورد.`;
+  toast('تم إرسال طلب التقديم بنجاح','success');
+  $('rgName').value=''; $('rgDiscord').value=''; $('rgEmail').value=''; $('rgWhy').value='';
+  renderKYC(); renderAdminOverview();
+}
+
+// RULES
+let ruleFilter='all';
+function setRuleFilter(f){
+  ruleFilter=f;
+  document.querySelectorAll('[data-rtab]').forEach(b=>{b.classList.toggle('active',b.dataset.rtab===f); b.classList.toggle('text-muted',b.dataset.rtab!==f);});
+  renderRules();
+}
+function renderRules(){
+  const q=($('ruleSearch')?.value||'').toLowerCase();
+  let list=defaultRules;
+  // also allow dynamic? keep defaults
+  if(ruleFilter!=='all') list=list.filter(r=>r.cat===ruleFilter);
+  if(q) list=list.filter(r=> r.title.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q));
+  const el=$('rulesList');
+  if(!el) return;
+  if(!list.length) el.innerHTML=`<div class="text-center py-12 glass rounded-2xl text-muted">لا توجد قوانين مطابقة</div>`;
+  else el.innerHTML=list.map(r=>`
+    <div class="glass rounded-2xl p-5 flex gap-4 items-start">
+      <div class="step-num">${r.id}</div>
+      <div class="flex-1">
+        <div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-white">${r.title}</h3><span class="chip bg-white/10 text-white border border-white/10">${r.cat==='general'?'عام':r.cat==='rp'?'رول بلاي':r.cat==='crime'?'جرائم':r.cat==='police'?'شرطة':'عقوبات'}</span></div>
+        <p class="text-sm text-muted leading-6 mt-1">${r.desc}</p>
+        <div class="mt-2 text-xs font-bold text-crimson bg-crimson/10 border border-crimson/20 rounded-lg px-3 py-1.5 inline-block">العقوبة: ${r.punish}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// NEWS
+function renderNews(){
+  const news=LS.get('od_news',defaultNews);
+  const feat=$('newsFeatured'), grid=$('newsGridPage');
+  if(!news.length) return;
+  if(feat) feat.innerHTML=`
+    <div class="glass rounded-3xl overflow-hidden shine-border grid md:grid-cols-2">
+      <img src="${news[0].img}" class="h-[260px] md:h-auto w-full object-cover">
+      <div class="p-6 flex flex-col">
+        <span class="chip bg-gold text-black w-fit">${news[0].cat}</span>
+        <h3 class="font-changa font-extrabold text-xl text-white mt-2 leading-7">${news[0].title}</h3>
+        <p class="text-sm text-muted mt-2 leading-6 flex-1">${news[0].ex}</p>
+        <div class="flex items-center gap-3 mt-4 text-xs text-muted"><span><i class="fa-solid fa-calendar"></i> ${news[0].date}</span><span><i class="fa-solid fa-eye"></i> ${news[0].views.toLocaleString()}</span></div>
+        <button onclick="toast('تم فتح الخبر كاملاً','info')" class="btn-gold rounded-xl py-2.5 mt-4 text-xs">قراءة المزيد</button>
+      </div>
+    </div>
+  `;
+  if(grid) grid.innerHTML=news.slice(1).map(n=>`
+    <div class="glass rounded-3xl overflow-hidden shine-border flex flex-col">
+      <img src="${n.img}" class="h-[160px] w-full object-cover">
+      <div class="p-4 flex-1 flex flex-col">
+        <span class="chip bg-white/10 text-white w-fit">${n.cat}</span>
+        <h4 class="font-bold text-white mt-2 leading-6">${n.title}</h4>
+        <p class="text-xs text-muted mt-1 flex-1">${n.ex}</p>
+        <div class="flex justify-between items-center mt-3 text-[11px] text-muted"><span>${n.date}</span><span>${n.views.toLocaleString()} مشاهدة</span></div>
+      </div>
+    </div>
+  `).join('');
+  renderAdminNews();
+}
+
+// SUPPORT
+function submitTicket(){
+  const name=$('tkName').value.trim(), title=$('tkTitle').value.trim(), msg=$('tkMsg').value.trim();
+  if(!name||!title||!msg) return toast('يرجى تعبئة جميع حقول التذكرة','error');
+  const tickets=LS.get('od_tickets',[]);
+  tickets.unshift({id:Date.now(),name,title,msg,status:'open',date:new Date().toISOString().slice(0,10),reply:''});
+  LS.set('od_tickets',tickets);
+  $('tkName').value=''; $('tkTitle').value=''; $('tkMsg').value='';
+  toast('تم إرسال التذكرة بنجاح 🎫','success');
+  renderTickets(); renderAdminTickets(); renderAdminOverview();
+}
+function renderTickets(){
+  const tickets=LS.get('od_tickets',[]);
+  const el=$('ticketsList'), lbl=$('ticketsCountLabel');
+  if(lbl) lbl.textContent=tickets.length+' تذكرة';
+  if(!el) return;
+  if(!tickets.length) el.innerHTML=`<div class="text-center py-10 text-muted text-xs">لا توجد تذاكر حالياً</div>`;
+  else el.innerHTML=tickets.map(t=>`
+    <div class="bg-black/40 border border-line rounded-2xl p-4">
+      <div class="flex justify-between items-start"><h4 class="font-bold text-sm text-white">${t.title}</h4><span class="chip ${t.status==='open'?'bg-gold/15 text-gold border border-gold/30':'bg-green-500/20 text-green-300 border border-green-500/30'}">${t.status==='open'?'مفتوحة':'مغلقة'}</span></div>
+      <p class="text-xs text-muted mt-1">${t.msg}</p>
+      <div class="text-[11px] text-muted mt-2 flex justify-between"><span>${t.name}</span><span>${t.date}</span></div>
+      ${t.reply?`<div class="mt-3 bg-gold/10 border border-gold/20 rounded-xl p-3 text-xs"><b class="text-gold">رد الإدارة:</b> ${t.reply}</div>`:''}
+    </div>
+  `).join('');
+}
+
+// DASHBOARD
+function renderDashboard(){
+  const cur=LS.get('od_currentUser',null);
+  const guest=$('dashGuest'), user=$('dashUser');
+  if(!cur){ guest.classList.remove('hidden'); user.classList.add('hidden'); return; }
+  guest.classList.add('hidden'); user.classList.remove('hidden');
+  $('dashAvatar').textContent=(cur.avatar||cur.name[0]).toUpperCase();
+  $('dashName').textContent=cur.name;
+  $('dashEmail').textContent=cur.email;
+  $('dashRoleBadge').textContent=cur.role;
+  $('dashWallet2').textContent=(cur.wallet||0).toLocaleString();
+  $('dashKycBadge').textContent=cur.verified?'موثق ✅':'غير موثق';
+  $('dashKycBadge').className= cur.verified?'chip bg-green-500/20 text-green-300 border border-green-500/30':'chip bg-white/10 text-white border border-white/10';
+  $('dashMoney').textContent=(cur.money||0).toLocaleString()+'$';
+  const orders=LS.get('od_orders',[]).filter(o=>o.user===cur.email);
+  $('dashOrders').textContent=orders.length;
+  renderOrdersList();
+  updateAuthUI();
+}
+function claimDaily(){
+  const cur=LS.get('od_currentUser',null);
+  if(!cur) return toast('سجل دخولك أولاً','error');
+  const key='od_daily_'+cur.email;
+  const last=localStorage.getItem(key);
+  const today=new Date().toDateString();
+  if(last===today) return toast('لقد استلمت مكافأتك اليوم بالفعل! عد غداً 🎁','info');
+  let users=LS.get('od_users',[]);
+  let u=users.find(x=>x.email===cur.email);
+  if(u){u.wallet+=50; u.money+=5000; LS.set('od_users',users); LS.set('od_currentUser',u); localStorage.setItem(key,today); toast('تم إضافة 5,000$ + 50 نقطة لرصيدك! 🎉','success'); renderDashboard();}
+}
+
+// ADMIN AUTH
+function adminDemoLogin(){
+  const users=LS.get('od_users',defaultUsers);
+  let admin=users.find(u=>u.email==='admin@oneday-rp.com');
+  LS.set('od_currentUser',admin);
+  updateAuthUI();
+  checkAdminAuth();
+  toast('تم الدخول كمدير عام ✅','success');
+}
+function checkAdminAuth(){
+  const cur=LS.get('od_currentUser',null);
+  const isAdmin=cur && (cur.email==='admin@oneday-rp.com' || cur.role==='إدارة' || cur.role==='مؤسس');
+  $('adminLock').classList.toggle('hidden', !!isAdmin);
+  $('adminContent').classList.toggle('hidden', !isAdmin);
+  if(isAdmin){
+    $('adminHello').textContent=cur.name;
+    renderAdminOverview();
+    renderAdminUsers();
+    renderAdminProducts();
+    renderAdminOrders();
+    renderKYC();
+    renderAdminTickets();
+    renderAdminNews();
+    renderOffers();
+    renderBroadcastHist();
+    applySiteContentToDOM();
+    initCharts();
+  }
+}
+function showAdminTab(tab){
+  document.querySelectorAll('.atab').forEach(b=>{b.classList.toggle('active',b.dataset.atab===tab); b.classList.toggle('text-muted',b.dataset.atab!==tab);});
+  document.querySelectorAll('.atab-pane').forEach(p=>p.classList.add('hidden'));
+  const pane=$('atab-'+tab);
+  if(pane) pane.classList.remove('hidden');
+}
+
+// ADMIN OVERVIEW
+function renderAdminOverview(){
+  const orders=LS.get('od_orders',[]);
+  const users=LS.get('od_users',[]);
+  const tickets=LS.get('od_tickets',[]);
+  const pending=orders.filter(o=>o.status==='pending').length;
+  const revenue=orders.filter(o=>o.status!=='rejected' && o.status!=='refunded').reduce((s,o)=>s+o.total,0);
+  $('stRevenue').textContent=revenue.toLocaleString();
+  $('stOrders').textContent=orders.length;
+  $('stPending').textContent=pending;
+  $('stUsers').textContent=users.length;
+  $('stUsers').nextElementSibling; // keep
+  const settings=LS.get('od_settings',{});
+  $('stOnline').textContent=settings.online;
+  if($('stTickets')) $('stTickets').textContent=tickets.filter(t=>t.status==='open').length;
+  if($('adminOrdersBadge')) $('adminOrdersBadge').textContent=orders.length;
+  if($('admUsersCountBadge')) $('admUsersCountBadge').textContent=users.length;
+  if($('adminTicketsBadge')) $('adminTicketsBadge').textContent=tickets.filter(t=>t.status==='open').length;
+  if($('admKycBadge')) $('admKycBadge').textContent=LS.get('od_kyc',[]).filter(k=>k.status==='pending').length;
+  if($('kycPendingCountBadge')) $('kycPendingCountBadge').textContent=LS.get('od_kyc',[]).filter(k=>k.status==='pending').length+' طلب معلق';
+  $('setOnlineRange').value=settings.online;
+  $('setOnlineLbl').textContent=settings.online;
+  const maint=settings.maintenance;
+  $('adminDot').className=maint?'status-dot off':'status-dot';
+  $('hdrDot').className=maint?'status-dot off':'status-dot';
+  $('srvState').textContent=maint?'صيانة':'متصل الآن';
+  $('srvState').className=maint?'text-crimson font-extrabold':'text-green-400 font-extrabold';
+  $('adminSrvLbl').textContent=maint?'السيرفر في وضع الصيانة':'السيرفر متصل';
+  $('srvStateMiniLbl').textContent=maint?'وضع الصيانة مفعل':'متاح للجميع';
+  $('maintBtn').textContent=maint?'إيقاف الصيانة ❌':'يعمل بنجاح ✅';
+  $('maintBtn').className=maint?'rounded-xl px-4 py-2.5 text-xs font-extrabold bg-crimson text-white':'btn-gold rounded-xl px-4 py-2.5 text-xs font-extrabold';
+  // recent
+  const recent=$('adminRecent');
+  if(recent){
+    const last=orders.slice(0,4);
+    recent.innerHTML= last.length? last.map(o=>`<div class="flex justify-between items-center bg-black/40 border border-line rounded-xl p-3"><div><div class="font-orbit text-xs font-bold text-gold">${o.id}</div><div class="text-xs font-bold text-white">${o.products.slice(0,40)}</div><div class="text-[11px] text-muted">${o.date} • ${o.name}</div></div><div class="text-left"><div class="font-orbit font-black text-gold">${o.total} ر.س</div><span class="chip ${o.status==='pending'?'bg-gold text-black':'bg-green-500 text-white'}">${o.status}</span></div></div>`).join('') : `<div class="text-center py-6 text-muted text-xs">لا توجد عمليات بعد</div>`;
+  }
+  // seats
+  const seatsTotal=settings.seatsTotal, seatsTaken=settings.seatsTaken;
+  const seatsLeftEl=$('seatsLeft');
+  if(seatsLeftEl) seatsLeftEl.textContent=Math.max(0, seatsTotal - seatsTaken);
+  if($('onlineHdr')) $('onlineHdr').textContent=settings.online;
+  if($('heroOnline')) $('heroOnline').textContent=settings.online;
+  if($('sideOnline')) $('sideOnline').textContent=settings.online;
+  renderBanLog();
+}
+function quickOnline(val){
+  const s=LS.get('od_settings',{}); s.online=Number(val); LS.set('od_settings',s);
+  $('setOnlineLbl').textContent=val;
+  renderAdminOverview();
+  toast('تم تحديث عدد المتصلين إلى '+val,'success');
+}
+function toggleMaintenance(){
+  const s=LS.get('od_settings',{}); s.maintenance=!s.maintenance; LS.set('od_settings',s);
+  renderAdminOverview(); toast(s.maintenance?'تم تفعيل وضع الصيانة 🔧':'تم إيقاف الصيانة والسيرفر متاح ✅', s.maintenance?'error':'success');
+}
+function rewardAll(){
+  const amt=Number($('globalReward').value);
+  if(!amt || amt<=0) return toast('أدخل مبلغ صحيح','error');
+  let users=LS.get('od_users',[]);
+  users.forEach(u=>{ if(u.status!=='banned'){u.money=(u.money||0)+amt; u.wallet=(u.wallet||0)+ Math.round(amt/100); }});
+  LS.set('od_users',users);
+  const cur=LS.get('od_currentUser',null);
+  if(cur){ let u=users.find(x=>x.email===cur.email); if(u) LS.set('od_currentUser',u); }
+  $('globalReward').value='';
+  toast(`تم توزيع ${amt}$ لكل اللاعبين 🎁`,'success');
+  renderAdminUsers(); renderDashboard();
+}
+
+// BAN LOG
+function renderBanLog(){
+  const log=LS.get('od_banlog',[]);
+  $('banLogCount').textContent=log.length+' مخالفة';
+  const el=$('banLogList');
+  if(!log.length) el.innerHTML=`<div class="text-center py-6 text-muted text-xs">لا يوجد سجل عقوبات</div>`;
+  else el.innerHTML=log.map(b=>`<div class="flex justify-between items-center bg-black/40 border border-crimson/20 rounded-xl p-3"><div><div class="font-bold text-sm text-white">${b.name}</div><div class="text-xs text-crimson">السبب: ${b.reason}</div><div class="text-[11px] text-muted">${b.date} • بواسطة ${b.by}</div></div><button onclick="unbanByName('${b.name}')" class="btn-ghost rounded-xl px-3 py-1.5 text-xs !text-green-300 !border-green-500/30">فك حظر</button></div>`).join('');
+}
+function unbanByName(name){
+  let users=LS.get('od_users',[]);
+  let u=users.find(x=>x.name===name);
+  if(u){u.status='active'; u.banReason=''; LS.set('od_users',users); toast('تم فك حظر '+name,'success');}
+  let log=LS.get('od_banlog',[]); log=log.filter(b=>b.name!==name); LS.set('od_banlog',log);
+  renderAdminUsers(); renderAdminOverview();
+}
+
+// USERS MGMT
+function renderAdminUsers(){
+  const q=($('admUserSearch')?.value||'').toLowerCase();
+  let users=LS.get('od_users',[]);
+  if(q) users=users.filter(u=> u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
+  const el=$('adminUsersList');
+  el.innerHTML=users.map(u=>`
+    <div class="bg-black/40 border ${u.status==='banned'?'border-crimson/40 bg-crimson/5':'border-line'} rounded-2xl p-4">
+      <div class="flex gap-3">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center font-orbit font-black text-lg ${u.status==='banned'?'bg-crimson text-white':'bg-gold text-black'}" style="${u.status!=='banned'?'background:linear-gradient(135deg,var(--gold2),#FF6B00)':''}">${u.avatar}</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap"><b class="text-white">${u.name}</b><span class="chip ${u.role.includes('VIP')?'bg-gold text-black':u.role==='مؤسس'?'bg-violet-500 text-white':'bg-white/10 text-white'}">${u.role}</span>${u.verified?'<span class="chip bg-green-500/20 text-green-300 border border-green-500/30">موثق ✅</span>':''}${u.status==='banned'?'<span class="chip bg-crimson text-white">محظور</span>':''}</div>
+          <div class="text-xs text-muted font-orbit" dir="ltr">${u.email}</div>
+          <div class="text-xs font-bold mt-1"><span class="text-gold font-orbit">${(u.wallet||0).toLocaleString()} نقطة</span> • <span class="text-green-400 font-orbit">${(u.money||0).toLocaleString()}$</span></div>
+          ${u.status==='banned'?`<div class="text-xs text-crimson mt-1">السبب: ${u.banReason}</div>`:''}
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-2 mt-3">
+        ${u.status==='banned'
+          ? `<button onclick="unbanUser(${u.id})" class="btn-gold rounded-xl py-2 text-xs">فك الحظر 🔓</button>`
+          : `<button onclick="banUser(${u.id})" class="rounded-xl py-2 text-xs font-bold border border-crimson/40 text-crimson hover:bg-crimson/10">حظر 🚫</button>`
+        }
+        <button onclick="rewardUser(${u.id})" class="btn-ghost rounded-xl py-2 text-xs">مكافأة +5K 🎁</button>
+        <button onclick="promoteUser(${u.id})" class="btn-ghost rounded-xl py-2 text-xs">ترقية الرتبة ⭐</button>
+        <button onclick="deleteUser(${u.id})" class="rounded-xl py-2 text-xs font-bold border border-white/10 text-muted hover:bg-white/5">حذف</button>
+      </div>
+    </div>
+  `).join('');
+  if(!users.length) el.innerHTML=`<div class="col-span-full text-center py-8 text-muted">لا يوجد لاعبين مطابقين</div>`;
+}
+function banUser(id){
+  const reason=prompt('اكتب سبب الحظر:','مخالفة قوانين الرول بلاي');
+  if(reason===null) return;
+  if(!reason.trim()) return toast('يجب كتابة سبب الحظر','error');
+  let users=LS.get('od_users',[]); let u=users.find(x=>x.id===id);
+  if(!u) return;
+  u.status='banned'; u.banReason=reason;
+  LS.set('od_users',users);
+  let log=LS.get('od_banlog',[]); log.unshift({id:Date.now(),name:u.name,reason,by:'الإدارة',date:new Date().toISOString().slice(0,10)}); LS.set('od_banlog',log);
+  toast('تم حظر '+u.name,'error');
+  if(LS.get('od_currentUser',null)?.id===id){ logout(); }
+  renderAdminUsers(); renderAdminOverview();
+}
+function unbanUser(id){
+  let users=LS.get('od_users',[]); let u=users.find(x=>x.id===id);
+  if(!u) return;
+  u.status='active'; u.banReason='';
+  LS.set('od_users',users);
+  let log=LS.get('od_banlog',[]); log=log.filter(b=>b.name!==u.name); LS.set('od_banlog',log);
+  toast('تم فك حظر '+u.name,'success');
+  renderAdminUsers(); renderAdminOverview();
+}
+function rewardUser(id){
+  const amt=prompt('مبلغ المكافأة بالدولار:','5000');
+  if(!amt) return;
+  const n=Number(amt);
+  if(isNaN(n)||n<=0) return toast('مبلغ غير صحيح','error');
+  let users=LS.get('od_users',[]); let u=users.find(x=>x.id===id);
+  if(!u) return;
+  u.money=(u.money||0)+n; u.wallet=(u.wallet||0)+Math.round(n/100);
+  LS.set('od_users',users);
+  toast(`تمت مكافأة ${u.name} بـ ${n}$ 🎉`,'success');
+  renderAdminUsers(); if(LS.get('od_currentUser',{})?.id===id) renderDashboard();
+}
+function promoteUser(id){
+  let users=LS.get('od_users',[]); let u=users.find(x=>x.id===id);
+  if(!u) return;
+  const roles=['عضو','VIP ذهبي','VIP بلاتيني','إدارة','مؤسس'];
+  let idx=roles.indexOf(u.role);
+  if(idx===-1) idx=0;
+  u.role=roles[(idx+1)%roles.length];
+  LS.set('od_users',users);
+  toast(`تمت ترقية ${u.name} إلى ${u.role} ⭐`,'success');
+  renderAdminUsers();
+}
+function deleteUser(id){
+  if(!confirm('هل أنت متأكد من حذف هذا الحساب نهائياً؟')) return;
+  let users=LS.get('od_users',[]); users=users.filter(x=>x.id!==id); LS.set('od_users',users);
+  toast('تم حذف الحساب','info'); renderAdminUsers(); renderAdminOverview();
+}
+function addTestUser(){
+  const names=['راكان العتيبي','سعيد القحطاني','محمد الحارثي','عمر الزهراني'];
+  const n=names[Math.floor(Math.random()*names.length)];
+  let users=LS.get('od_users',[]);
+  users.push({id:Date.now(),name:n,email:n.replace(/\s/g,'').toLowerCase()+Math.floor(Math.random()*999)+'@gmail.com',pass:'123123',role:'عضو',wallet:Math.floor(Math.random()*500),money:Math.floor(Math.random()*50000),verified:Math.random()>0.5,avatar:n[0],status:'active',banReason:''});
+  LS.set('od_users',users); renderAdminUsers(); renderAdminOverview(); toast('تمت إضافة لاعب تجريبي: '+n,'success');
+}
+
+// PRODUCTS ADMIN
+function renderAdminProducts(){
+  const q=($('admProdSearch')?.value||'').toLowerCase();
+  let products=LS.get('od_products',defaultProducts);
+  if(q) products=products.filter(p=>p.name.toLowerCase().includes(q));
+  const tbody=$('adminProductsBody');
+  tbody.innerHTML=products.map(p=>`
+    <tr>
+      <td>
+        <div class="flex gap-2 items-center">
+          <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover border border-line">
+          <div><div class="font-bold text-white text-xs">${p.name}</div><div class="text-[11px] text-muted truncate max-w-[140px]">${p.desc}</div></div>
+        </div>
+      </td>
+      <td><span class="chip bg-white/10 text-white">${p.tab}</span></td>
+      <td><input type="number" value="${p.price}" onchange="editProductPrice(${p.id},this.value)" class="input !py-1 !px-2 text-xs font-orbit !w-[90px] text-center"></td>
+      <td class="font-orbit text-xs">${p.oldPrice||'-'}</td>
+      <td><span class="chip ${p.enabled===false?'bg-crimson text-white':'bg-green-500/20 text-green-300 border border-green-500/30'}">${p.enabled===false?'معطل':'مفعل'}</span></td>
+      <td>
+        <div class="flex gap-1">
+          <button onclick="toggleProductStatus(${p.id})" class="w-7 h-7 rounded-lg bg-white/5 border border-line flex items-center justify-center text-xs hover:bg-white/10" title="تفعيل/تعطيل"><i class="fa-solid ${p.enabled===false?'fa-eye-slash':'fa-eye'}"></i></button>
+          <button onclick="deleteProduct(${p.id})" class="w-7 h-7 rounded-lg bg-crimson/10 border border-crimson/30 text-crimson flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+function editProductPrice(id,val){
+  let products=LS.get('od_products',defaultProducts);
+  let p=products.find(x=>x.id===id);
+  if(!p) return;
+  p.price=Number(val)||0;
+  LS.set('od_products',products);
+  toast('تم تحديث سعر '+p.name+' إلى '+p.price+' ر.س','success');
+  renderStore(); renderAdminProducts();
+}
+function adjustAllPrices(pct){
+  let products=LS.get('od_products',defaultProducts);
+  products.forEach(p=>{p.price=Math.max(1, Math.round(p.price*(1+pct/100)));});
+  LS.set('od_products',products);
+  toast(`تم ${pct>0?'زيادة':'تخفيض'} أسعار المتجر بنسبة ${Math.abs(pct)}% ✅`,'success');
+  renderAdminProducts(); renderStore();
+}
+function resetPrices(){
+  LS.set('od_products',JSON.parse(JSON.stringify(defaultProducts)));
+  toast('تمت استعادة الأسعار الافتراضية','info');
+  renderAdminProducts(); renderStore();
+}
+function toggleNewProd(show){
+  $('newProdBox').classList.toggle('hidden',!show);
+}
+function addProduct(){
+  const name=$('npName').value.trim(), price=Number($('npPrice').value), oldPrice=Number($('npOld').value)||null, tab=$('npTab').value, img=$('npImg').value.trim()||'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop';
+  if(!name||!price) return toast('أدخل اسم المنتج والسعر','error');
+  let products=LS.get('od_products',defaultProducts);
+  products.unshift({id:Date.now(),name,price,oldPrice: oldPrice||Math.round(price*1.4),tab,img,badge:'جديد',pop:99,desc:'منتج جديد مضاف عبر لوحة الإدارة',enabled:true});
+  LS.set('od_products',products);
+  $('npName').value=''; $('npPrice').value=''; $('npOld').value=''; $('npImg').value='';
+  toggleNewProd(false);
+  renderAdminProducts(); renderStore();
+  toast('تمت إضافة المنتج بنجاح ✅','success');
+}
+function deleteProduct(id){
+  if(!confirm('حذف هذا المنتج نهائياً؟')) return;
+  let products=LS.get('od_products',defaultProducts);
+  products=products.filter(p=>p.id!==id);
+  LS.set('od_products',products);
+  renderAdminProducts(); renderStore();
+  toast('تم حذف المنتج','info');
+}
+function toggleProductStatus(id){
+  let products=LS.get('od_products',defaultProducts);
+  let p=products.find(x=>x.id===id);
+  if(!p) return;
+  p.enabled= p.enabled===false?true:false;
+  LS.set('od_products',products);
+  renderAdminProducts(); renderStore();
+  toast(p.enabled?'تم تفعيل المنتج':'تم تعطيل المنتج','info');
+}
+
+// OFFERS
+function saveOfferCode(){
+  const code=$('offerCode').value.trim().toUpperCase()||'ONEDAY30';
+  const pct=Number($('offerPct').value)||30;
+  const offers=LS.get('od_offers',{});
+  offers.code=code; offers.pct=pct;
+  LS.set('od_offers',offers);
+  $('storePromoHint').textContent=`كود ${code} يمنحك خصماً فورياً ${pct}% في السلة!`;
+  renderOffers();
+  toast('تم حفظ كود الخصم: '+code+' بخصم '+pct+'%','success');
+}
+function applyFlash(){
+  const pid=Number($('flashProd').value);
+  const disc=Number($('flashDisc').value)||25;
+  let products=LS.get('od_products',defaultProducts);
+  let p=products.find(x=>x.id===pid);
+  if(!p) return toast('اختر منتجاً','error');
+  const old=p.price;
+  p.oldPrice=old;
+  p.price=Math.round(old*(1-disc/100));
+  LS.set('od_products',products);
+  renderAdminProducts(); renderStore(); renderOffers();
+  toast(`تم تطبيق خصم ${disc}% على ${p.name} ⚡`,'success');
+}
+function renderOffers(){
+  const offers=LS.get('od_offers',{});
+  const el=$('activeOffers');
+  if(!el) return;
+  const products=LS.get('od_products',defaultProducts).filter(p=>p.oldPrice && p.oldPrice>p.price);
+  let html=`<div class="flex items-center gap-2 text-xs font-bold"><span class="chip bg-gold text-black">${offers.code}</span> خصم ${offers.pct}% عام في السلة</div>`;
+  if(products.length) html+= products.slice(0,3).map(p=>`<div class="flex justify-between items-center bg-black/40 border border-line rounded-xl p-2 text-xs"><span>${p.name}</span><span class="font-orbit text-gold">${p.price} ر.س <span class="line-through text-muted text-[10px]">${p.oldPrice}</span></span></div>`).join('');
+  else html+= `<div class="text-xs text-muted">لا توجد عروض فلاش مفعلة حالياً</div>`;
+  el.innerHTML=html;
+}
+
+// ORDERS ADMIN
+function renderAdminOrders(){
+  const filter=$('admOrderFilter')?.value||'all';
+  let orders=LS.get('od_orders',[]);
+  if(filter!=='all') orders=orders.filter(o=>o.status===filter);
+  const el=$('adminOrdersList');
+  if(!orders.length) el.innerHTML=`<div class="text-center py-10 glass rounded-2xl text-muted text-sm">لا توجد طلبات ${filter!=='all'?'بهذه الحالة':''}</div>`;
+  else el.innerHTML=orders.map(o=>`
+    <div class="bg-black/40 border border-line rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div class="flex-1">
+        <div class="flex items-center gap-2 flex-wrap"><span class="font-orbit font-black text-gold">${o.id}</span><span class="chip ${o.status==='pending'?'bg-gold text-black':o.status==='done'?'bg-green-500 text-white':o.status==='refunded'?'bg-white/10 text-white':'bg-crimson text-white'}">${o.status==='pending'?'قيد الانتظار':o.status==='done'?'مكتمل':o.status==='refunded'?'مسترد':'مرفوض'}</span><span class="text-xs text-muted">${o.date}</span></div>
+        <div class="font-bold text-sm text-white mt-1">${o.products}</div>
+        <div class="text-xs text-muted">العميل: ${o.name} (${o.user}) • الإجمالي: <b class="text-gold font-orbit">${o.total} ر.س</b> ${o.discount?`<span class="text-green-400">خصم ${o.discount} ر.س</span>`:''}</div>
+      </div>
+      <div class="flex gap-2 flex-wrap">
+        ${o.status==='pending'?`
+          <button onclick="updateOrderStatus('${o.id}','done')" class="btn-gold rounded-xl px-4 py-1.5 text-xs">قبول ✅</button>
+          <button onclick="updateOrderStatus('${o.id}','rejected')" class="rounded-xl px-4 py-1.5 text-xs font-bold border border-crimson/40 text-crimson">رفض ❌</button>
+        `:''}
+        ${o.status==='done'?`<button onclick="updateOrderStatus('${o.id}','refunded')" class="btn-ghost rounded-xl px-4 py-1.5 text-xs">استرداد ↩️</button>`:''}
+        <button onclick="deleteOrder('${o.id}')" class="btn-ghost rounded-xl px-3 py-1.5 text-xs">حذف</button>
+      </div>
+    </div>
+  `).join('');
+}
+function updateOrderStatus(id,status){
+  let orders=LS.get('od_orders',[]);
+  let o=orders.find(x=>x.id===id);
+  if(!o) return;
+  o.status=status;
+  LS.set('od_orders',orders);
+  toast('تم تحديث حالة الطلب '+id+' إلى '+status,'success');
+  renderAdminOrders(); renderAdminOverview(); renderOrdersList();
+}
+function deleteOrder(id){
+  if(!confirm('حذف هذا الطلب؟')) return;
+  let orders=LS.get('od_orders',[]);
+  orders=orders.filter(o=>o.id!==id);
+  LS.set('od_orders',orders);
+  renderAdminOrders(); renderAdminOverview(); renderOrdersList();
+}
+function seedDemoOrders(){
+  const users=LS.get('od_users',defaultUsers);
+  const products=LS.get('od_products',defaultProducts);
+  let orders=LS.get('od_orders',[]);
+  for(let i=0;i<3;i++){
+    const u=users[Math.floor(Math.random()*users.length)];
+    const p=products[Math.floor(Math.random()*products.length)];
+    orders.unshift({id:'OD-'+Math.floor(100000+Math.random()*900000),user:u.email,name:u.name,products:p.name,total:p.price,raw:p.price,discount:0,status:Math.random()>0.5?'pending':'done',date:new Date().toISOString().slice(0,10),items:[{id:p.id,qty:1}]});
+  }
+  LS.set('od_orders',orders);
+  renderAdminOrders(); renderAdminOverview(); renderOrdersList();
+  toast('تم توليد 3 طلبات تجريبية ✅','success');
+}
+
+// SITE CONTENT CMS
+function saveSiteContent(){
+  const heroTitle=$('cmsHeroTitle').value.trim() || 'عِش حياة ثانية';
+  const heroDesc=$('cmsHeroDesc').value.trim();
+  const heroBadge=$('cmsHeroBadge').value.trim();
+  const announceText=$('cmsAnnounceText').value.trim();
+  const announceShow=$('cmsAnnounceShow').checked;
+  const serverIP=$('cmsServerIP').value.trim()||'play.oneday-rp.com';
+  const discord=$('cmsDiscordLink').value.trim()||'https://discord.gg/onedayrp';
+  let sc=LS.get('od_siteContent',{});
+  sc.heroTitle=heroTitle.includes('gold-text')?heroTitle: heroTitle+' <span class="gold-text">بقوانينك</span>';
+  // keep simple: if user entered plain, wrap last word
+  if(!$('cmsHeroTitle').value.includes('<')) sc.heroTitle=heroTitle;
+  else sc.heroTitle=heroTitle;
+  sc.heroDesc=heroDesc;
+  sc.heroBadge=heroBadge;
+  sc.announceText=announceText;
+  sc.announceShow=announceShow;
+  sc.serverIP=serverIP;
+  sc.discord=discord;
+  LS.set('od_siteContent',sc);
+  let settings=LS.get('od_settings',{}); settings.ip=serverIP; settings.discord=discord; LS.set('od_settings',settings);
+  applySiteContentToDOM();
+  toast('تم حفظ وتطبيق كافة النصوص والروابط بنجاح ✅','success');
+}
+function applySiteBg(){
+  const url=$('siteBg').value.trim();
+  if(!url) return toast('أدخل رابط الصورة','error');
+  let sc=LS.get('od_siteContent',{}); sc.siteBg=url; LS.set('od_siteContent',sc);
+  $('siteBgOverlay').style.backgroundImage=`url('${url}')`;
+  toast('تم تطبيق خلفية الموقع ✅','success');
+}
+function clearSiteBg(){
+  let sc=LS.get('od_siteContent',{}); sc.siteBg=''; LS.set('od_siteContent',sc);
+  $('siteBgOverlay').style.backgroundImage='none';
+  $('siteBg').value='';
+  toast('تمت إزالة خلفية الموقع','info');
+}
+function presetBg(n){
+  const urls={1:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=2000&auto=format&fit=crop',2:'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000&auto=format&fit=crop',3:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2000&auto=format&fit=crop'};
+  $('siteBg').value=urls[n]; applySiteBg();
+}
+function applyHeroBg(){
+  const url=$('heroBgInput').value.trim();
+  if(!url) return toast('أدخل رابط صورة الهيرو','error');
+  let sc=LS.get('od_siteContent',{}); sc.heroBg=url; LS.set('od_siteContent',sc);
+  $('heroBgImg').src=url;
+  toast('تم تحديث صورة الهيرو ✅','success');
+}
+function applyGold(){
+  const col=$('goldColor').value || $('goldColorText').value;
+  document.documentElement.style.setProperty('--gold',col);
+  let rgb=hexToRgb(col); if(rgb) document.documentElement.style.setProperty('--gold-rgb',`${rgb.r},${rgb.g},${rgb.b}`);
+  let sc=LS.get('od_siteContent',{}); sc.gold=col; LS.set('od_siteContent',sc);
+  $('goldColorText').value=col; $('goldColor').value=col;
+}
+function setGoldPreset(c){
+  $('goldColor').value=c; $('goldColorText').value=c; applyGold(); toast('تم تغيير لون الثيم إلى '+c,'success');
+}
+function saveCountdownConfig(){
+  const d=Number($('cfgDays').value)||2, h=Number($('cfgHours').value)||14;
+  LS.set('od_countdown',{days:d,hours:h});
+  countdownTarget= Date.now() + d*24*60*60*1000 + h*60*60*1000;
+  toast('تم تحديث العداد','success');
+}
+
+// COUNTDOWN
+let countdownTarget= Date.now() + 2*24*60*60*1000 + 14*60*60*1000 + 36*60*1000 + 8*1000;
+function initCountdown(){
+  const cd=LS.get('od_countdown',null);
+  if(cd) countdownTarget= Date.now() + cd.days*24*60*60*1000 + cd.hours*60*60*1000 + 36*60*1000;
+  setInterval(()=>{
+    let diff=Math.max(0, countdownTarget - Date.now());
+    const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+    if($('cdD')) $('cdD').textContent=String(d).padStart(2,'0');
+    if($('cdH')) $('cdH').textContent=String(h).padStart(2,'0');
+    if($('cdM')) $('cdM').textContent=String(m).padStart(2,'0');
+    if($('cdS')) $('cdS').textContent=String(s).padStart(2,'0');
+  },1000);
+}
+
+// KYC
+function renderKYC(){
+  const list=LS.get('od_kyc',[]);
+  const el=$('kycList');
+  if(!list.length) el.innerHTML=`<div class="text-center py-10 text-muted text-sm">لا توجد طلبات توثيق</div>`;
+  else el.innerHTML=list.map(k=>`
+    <div class="bg-black/40 border ${k.status==='pending'?'border-gold/30':k.status==='approved'?'border-green-500/30 bg-green-500/5':'border-crimson/30 bg-crimson/5'} rounded-2xl p-4">
+      <div class="flex justify-between items-start">
+        <div><div class="font-bold text-white">${k.name} <span class="chip bg-white/10 text-white">${k.age}</span></div><div class="text-xs text-muted font-orbit">${k.discord} • ${k.email} • ${k.date}</div></div>
+        <span class="chip ${k.status==='pending'?'bg-gold text-black':k.status==='approved'?'bg-green-500 text-white':'bg-crimson text-white'}">${k.status==='pending'?'معلق':k.status==='approved'?'مقبول ✅':'مرفوض'}</span>
+      </div>
+      <p class="text-sm text-muted mt-2 leading-6 bg-black/30 p-3 rounded-xl border border-line">${k.why}</p>
+      ${k.status==='pending'?`<div class="flex gap-2 mt-3"><button onclick="approveKYC(${k.id})" class="btn-gold flex-1 rounded-xl py-2 text-xs">قبول ومنح موثق ✅</button><button onclick="rejectKYC(${k.id})" class="btn-ghost flex-1 rounded-xl py-2 text-xs !text-crimson !border-crimson/30">رفض ❌</button></div>`:''}
+    </div>
+  `).join('');
+}
+function approveKYC(id){
+  let list=LS.get('od_kyc',[]); let k=list.find(x=>x.id===id); if(!k) return;
+  k.status='approved';
+  LS.set('od_kyc',list);
+  // create user if not exists
+  let users=LS.get('od_users',[]);
+  if(!users.find(u=>u.email===k.email)){
+    users.push({id:Date.now(),name:k.name,email:k.email,pass:'123123',role:'عضو',wallet:0,money:20000,verified:true,avatar:k.name[0],status:'active',banReason:''});
+    LS.set('od_users',users);
+  } else {
+    let u=users.find(u=>u.email===k.email); u.verified=true; LS.set('od_users',users);
+  }
+  renderKYC(); renderAdminUsers(); renderAdminOverview();
+  toast('تم قبول طلب '+k.name+' ✅','success');
+}
+function rejectKYC(id){
+  let list=LS.get('od_kyc',[]); let k=list.find(x=>x.id===id); if(!k) return;
+  k.status='rejected'; LS.set('od_kyc',list); renderKYC(); renderAdminOverview(); toast('تم رفض الطلب','info');
+}
+
+// TICKETS ADMIN
+function renderAdminTickets(){
+  const tickets=LS.get('od_tickets',[]);
+  const el=$('adminTicketsList');
+  if(!tickets.length) el.innerHTML=`<div class="text-center py-10 text-muted text-sm">لا توجد تذاكر</div>`;
+  else el.innerHTML=tickets.map(t=>`
+    <div class="bg-black/40 border ${t.status==='open'?'border-gold/30':'border-green-500/30'} rounded-2xl p-4">
+      <div class="flex justify-between items-start"><h4 class="font-bold text-white">${t.title}</h4><span class="chip ${t.status==='open'?'bg-gold text-black':'bg-green-500 text-white'}">${t.status==='open'?'مفتوحة':'مغلقة'}</span></div>
+      <p class="text-xs text-muted mt-1">${t.msg}</p>
+      <div class="text-[11px] text-muted mt-1">${t.name} • ${t.date}</div>
+      ${t.reply?`<div class="mt-2 bg-white/5 border border-line rounded-xl p-2 text-xs"><b class="text-gold">ردك:</b> ${t.reply}</div>`:''}
+      <div class="flex gap-2 mt-3">
+        ${t.status==='open'?`<button onclick="replyTicket(${t.id})" class="btn-gold rounded-xl px-4 py-1.5 text-xs">رد ✉️</button><button onclick="closeTicket(${t.id})" class="btn-ghost rounded-xl px-4 py-1.5 text-xs">إغلاق ✅</button>`: `<button onclick="closeTicket(${t.id})" class="btn-ghost rounded-xl px-4 py-1.5 text-xs">إعادة فتح</button>`}
+        <button onclick="deleteTicket(${t.id})" class="rounded-xl px-3 py-1.5 text-xs border border-white/10 text-muted">حذف</button>
+      </div>
+    </div>
+  `).join('');
+}
+function replyTicket(id){
+  const txt=prompt('اكتب ردك على التذكرة:','تم حل مشكلتك، يرجى المحاولة الآن.');
+  if(txt===null) return;
+  if(!txt.trim()) return toast('اكتب نص الرد','error');
+  let tickets=LS.get('od_tickets',[]); let t=tickets.find(x=>x.id===id); if(!t) return;
+  t.reply=txt; t.status='open';
+  LS.set('od_tickets',tickets); renderAdminTickets(); renderTickets(); toast('تم إرسال الرد','success');
+}
+function closeTicket(id){
+  let tickets=LS.get('od_tickets',[]); let t=tickets.find(x=>x.id===id); if(!t) return;
+  t.status= t.status==='open'?'closed':'open';
+  LS.set('od_tickets',tickets); renderAdminTickets(); renderTickets(); renderAdminOverview();
+}
+function deleteTicket(id){
+  if(!confirm('حذف التذكرة؟')) return;
+  let tickets=LS.get('od_tickets',[]); tickets=tickets.filter(x=>x.id!==id); LS.set('od_tickets',tickets); renderAdminTickets(); renderTickets(); renderAdminOverview();
+}
+
+// NEWS ADMIN
+function addNews(){
+  const title=$('nnTitle').value.trim(), cat=$('nnCat').value, img=$('nnImg').value.trim()||'https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop', ex=$('nnEx').value.trim();
+  if(!title||!ex) return toast('أدخل عنوان وتفاصيل الخبر','error');
+  let news=LS.get('od_news',[]);
+  news.unshift({id:Date.now(),title,cat,img,ex,date:new Date().toISOString().slice(0,10),views:Math.floor(Math.random()*5000)});
+  LS.set('od_news',news);
+  $('nnTitle').value=''; $('nnImg').value=''; $('nnEx').value='';
+  renderNews(); renderAdminNews();
+  toast('تم نشر الخبر بنجاح 📰','success');
+}
+function renderAdminNews(){
+  const news=LS.get('od_news',[]);
+  const el=$('adminNewsList');
+  if(!el) return;
+  el.innerHTML=news.map(n=>`
+    <div class="flex gap-3 bg-black/40 border border-line rounded-2xl p-3 items-center">
+      <img src="${n.img}" class="w-14 h-14 rounded-xl object-cover">
+      <div class="flex-1 min-w-0"><div class="font-bold text-sm text-white truncate">${n.title}</div><div class="text-xs text-muted">${n.cat} • ${n.date} • ${n.views} مشاهدة</div></div>
+      <button onclick="deleteNews(${n.id})" class="w-8 h-8 rounded-lg bg-crimson/10 border border-crimson/30 text-crimson flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+    </div>
+  `).join('');
+}
+function deleteNews(id){
+  let news=LS.get('od_news',[]); news=news.filter(n=>n.id!==id); LS.set('od_news',news); renderNews(); toast('تم حذف الخبر','info');
+}
+
+// BROADCAST
+function sendBroadcast(){
+  const target=$('broadcastTarget').value, msg=$('broadcastMsg').value.trim();
+  if(!msg) return toast('اكتب نص الإشعار','error');
+  let hist=LS.get('od_broadcast',[]);
+  hist.unshift({id:Date.now(),target,msg,date:new Date().toLocaleString('ar-SA')});
+  LS.set('od_broadcast',hist);
+  $('broadcastMsg').value='';
+  renderBroadcastHist();
+  toast('📢 تم إرسال البث: '+msg,'success');
+  // show as toast for all
+  setTimeout(()=> toast('📢 إشعار جديد: '+msg,'info'), 400);
+}
+function renderBroadcastHist(){
+  const hist=LS.get('od_broadcast',[]);
+  const el=$('broadcastHist');
+  if(!hist.length) el.innerHTML=`<div class="text-center py-6 text-muted text-xs">لا توجد إشعارات مرسلة</div>`;
+  else el.innerHTML=hist.slice(0,5).map(h=>`<div class="bg-black/40 border border-line rounded-xl p-3 flex justify-between items-center"><div><div class="text-sm font-bold text-white">${h.msg}</div><div class="text-[11px] text-muted">${h.target} • ${h.date}</div></div><span class="chip bg-gold text-black">مُرسل</span></div>`).join('');
+}
+
+// SETTINGS
+function saveSettings(){
+  const ip=$('sIP').value.trim(), discord=$('sDiscord').value.trim(), total=Number($('sSeatsTotal').value), taken=Number($('sSeatsTaken').value);
+  if(!ip) return toast('أدخل عنوان السيرفر','error');
+  let s=LS.get('od_settings',{}); s.ip=ip; s.discord=discord; s.seatsTotal=total; s.seatsTaken=taken; LS.set('od_settings',s);
+  let sc=LS.get('od_siteContent',{}); sc.serverIP=ip; sc.discord=discord; LS.set('od_siteContent',sc);
+  applySiteContentToDOM(); renderAdminOverview();
+  toast('تم حفظ الإعدادات بنجاح 💾','success');
+}
+function resetDemo(){
+  if(!confirm('هل أنت متأكد من تصفير جميع البيانات وإعادتها للوضع الافتراضي؟')) return;
+  localStorage.clear();
+  ensureDefaults();
+  location.reload();
+}
+function exportCSV(){
+  const orders=LS.get('od_orders',[]);
+  if(!orders.length) return toast('لا توجد بيانات للتصدير','error');
+  let csv='ID,Customer,Email,Products,Total,Status,Date\n';
+  orders.forEach(o=>{ csv+=`"${o.id}","${o.name}","${o.user}","${o.products.replace(/"/g,'""')}",${o.total},${o.status},${o.date}\n`;});
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='oneday_orders.csv'; a.click(); URL.revokeObjectURL(url);
+  toast('تم تصدير ملف CSV 📄','success');
+}
+
+// CHARTS
+let salesChart=null, catsChart=null;
+function initCharts(){
+  const salesCtx=$('chSales'), catsCtx=$('chCats');
+  if(!salesCtx||!catsCtx) return;
+  if(salesChart) salesChart.destroy();
+  if(catsChart) catsChart.destroy();
+  const orders=LS.get('od_orders',[]);
+  // last 7 days mock if no orders
+  const labels=['السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'];
+  const data=labels.map((_,i)=> {
+    // generate pseudo sales from orders
+    if(orders.length) return Math.floor(Math.random()*8)+ orders.length*1.2;
+    return [2,4,3,7,5,9,6][i];
+  });
+  Chart.defaults.color='#9AA0B5';
+  Chart.defaults.borderColor='rgba(255,255,255,0.06)';
+  salesChart=new Chart(salesCtx,{
+    type:'line',
+    data:{labels,datasets:[{label:'المبيعات',data,borderColor:'#FFB800',backgroundColor:'rgba(255,184,0,0.15)',fill:true,tension:0.4,pointRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'}}}}
+  });
+  const prods=LS.get('od_products',defaultProducts);
+  const cats={vip:0,coins:0,cars:0,estate:0,service:0};
+  orders.forEach(o=>{
+    // approximate
+    if(o.products.includes('VIP')) cats.vip++;
+    else if(o.products.includes('$')||o.products.includes('كاش')) cats.coins++;
+    else if(o.products.includes('Bugatti')||o.products.includes('سيارة')) cats.cars++;
+    else cats.service++;
+  });
+  if(Object.values(cats).every(v=>v===0)){ cats.vip=4; cats.coins=6; cats.cars=3; cats.estate=2; cats.service=1; }
+  catsChart=new Chart(catsCtx,{
+    type:'doughnut',
+    data:{labels:['VIP','عملات','سيارات','عقارات','خدمات'],datasets:[{data:Object.values(cats),backgroundColor:['#FFB800','#00E5FF','#FF2E4D','#7C3AED','#22c55e'],borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:12,font:{family:'Cairo'}}}}}
+  });
+}
+
+// INIT
+document.addEventListener('DOMContentLoaded',()=>{
+  applySiteContentToDOM();
+  renderStore();
+  renderRules();
+  renderNews();
+  renderTickets();
+  renderDashboard();
+  renderOrdersList();
+  updateAuthUI();
+  updateCartUI();
+  initCountdown();
+  checkAdminAuth();
+  // header online from settings
+  const s=LS.get('od_settings',{}); if($('onlineHdr')) $('onlineHdr').textContent=s.online; if($('heroOnline')) $('heroOnline').textContent=s.online; if($('sideOnline')) $('sideOnline').textContent=s.online;
+  // close modals on esc
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('cartDrawer').classList.add('hidden'); $('authModal').classList.add('hidden'); $('videoModal').classList.add('hidden'); $('helpModal').classList.add('hidden'); toggleMobile(false);} });
+});
+</script>
+</body>
+</html>
